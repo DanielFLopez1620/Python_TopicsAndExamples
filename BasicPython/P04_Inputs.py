@@ -7,3 +7,5 @@ let = input("Type a letter: ")[0]
 print(let)
 flo = float(input("Type a decimal: "))
 print(flo)
+print("Do not forget to specify the casting if you want to read ", end="")
+print("a different type from a string.")
