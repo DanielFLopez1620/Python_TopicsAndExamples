@@ -12,3 +12,5 @@ print(f"LowerCase: {name} --> {name.lower()}\n")
 name = "daniel"
 print(f"Capitalize: {name} --> {name.upper()}\n")
 print(f"Replace with an 'e': {name} --> {name.replace('a','e')}")
+print("\nFinally, if you want to know the length of the string use: len(<list>):")
+print(f"The length of {name} is equal to {len(name)}")
