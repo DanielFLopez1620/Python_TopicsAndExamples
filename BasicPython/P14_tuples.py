@@ -9,3 +9,10 @@ print(f"{convertion} is a {type(convertion)}")
 print(f"You can know the length of a tuple: len(my_tuple) = {len(my_tuple)} and you can also use slicing: [1:3]: {my_slice}")
 print("Now we will try to add a element...\n\nNOTE THIS WILL LAUNCH AN ERROR...\n")
 my_tuple.append(5)
+my_tuple2 = ('h','i','!')
+print("\nWhen you add two or more tuples, you are not modifying it, you are creating a new one:")
+sum_tuple = my_tuple + my_tuple2
+print(f"{my_tuple} + {my_tuple2} = {sum_tuple}")
+print("\nFinally, you can unpack a tuple by assigning multiple variables: ")
+x , y = my_tuple[0:2]
+print(f"The tuple {my_tuple[0:2]}, is unpacked in x: {x} and y:{y}")
