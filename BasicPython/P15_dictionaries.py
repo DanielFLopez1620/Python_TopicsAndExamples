@@ -1,7 +1,8 @@
 print("""
 Another iterable type is the dictionary, its structure is:
 <dict> = {"key1":"value1","key2":"value2",...}
-Its main characteristic is that it is not always organized but you can iterate and use it
+Its main characteristic is that it is not always organized (depends of the keys more than an index), 
+but you can iterate and use them)
 """)
 my_dict = {"One":1,"Two":2,"Three":3}
 print(f"Our dictionary is {my_dict}")
@@ -18,3 +19,5 @@ con = 1
 for values in my_dict.values():
     print(f"Value #{con} = {values}")
     con += 1
+veri = "Five" in my_dict
+print(f"You can verify is somthing is inside a list or dictionary with 'in'--> 'Five' in my_dict: {veri}")
