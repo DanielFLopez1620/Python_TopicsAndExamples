@@ -1,6 +1,3 @@
-from numpy import result_type
-
-
 def main():
     objective = int(input("Type a number: "))
     epsilon = 0.001
@@ -14,5 +11,7 @@ def main():
              up = answer
         answer = (up + down)/2
     print(f"The square root of {objective} is equals to {answer}")
+
+
 if __name__ == '__main__':
     main()
