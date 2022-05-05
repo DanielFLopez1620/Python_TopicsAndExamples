@@ -3,6 +3,9 @@ from time import time
 from currencyConverter import clearScreen
 
 def createRandom(ind):
+    """
+    Select a character based on the random index given, and return a random char according to the section
+    """
     seed(time())
     if ind == 1:
         return chr(randint(65,90))
