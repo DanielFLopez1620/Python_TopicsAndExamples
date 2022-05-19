@@ -45,6 +45,7 @@ def main():
         counterLives(lives)
         if lives <= 0:
             break
+        #TODO: Indicar victoria
         if '_' in game:
             print(f"You have won the game, the word was: {word}")
             break
