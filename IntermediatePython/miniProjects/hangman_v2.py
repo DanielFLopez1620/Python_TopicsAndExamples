@@ -75,7 +75,14 @@ HANGMANPICS = [
       |
 =========
 ''']
+
+# FUNCTIONS
 def obtain_word(name):
+    """
+    Save a list of words from a .txt file
+    name --> string: name of the file with its extension
+    return words --> list: Words read from the file
+    """
     words = []
     with open(name, 'r', encoding="utf-8") as sw:
         for line in sw:
@@ -101,7 +108,7 @@ def verifyMatch(word,given):
     return clue --> str: how is the player doing with the game
     """
     print(f"Given: {given}")
-    clue = ["_" for i in range(len(word))]
+    clue = ["_" for i in range(len(word)-1)]
     for i in given:
         if i in word:
             for j in range(len(word)):
@@ -109,7 +116,7 @@ def verifyMatch(word,given):
                     clue[j] = i
     return clue
 
-
+# MAIN Y RUN
 def main():
     # Define path for file of words and project.
     file_path = os.getcwd()
@@ -118,35 +125,47 @@ def main():
     file_path = os.path.join(file_path, "words_hangman.txt")
     options = obtain_word(file_path)
 
-    # Confugartion of seed, word and lives.
+    # Configuration of seed, word and lives.
     seed(time())
-    lives = 7
+    lives = 6
     word = options[randint(0,len(options)-1)]
     game = [" "]
     flag = True
 
     # Loop for the game.
-    while(flag):
-        letter = ' '
-        clue = verifyMatch(word,game)
-        for w in clue:
-            print(w, end="")
-        print()
-        counterLives(lives)
-        HANGMANPICS[7-lives]
-        if lives <= 0:
-            break
-        if '_' in game:
-            print(f"You have won the game, the word was: {word}")
-            break
-        #TODO: Verify winning aspect
-        while(letter in game):
-            letter = input("Type a letter for the hangman:")
-        game.append(letter)
-        if letter not in word:
-            lives -= 1
-        clearScreen()
+    try:
+        while(flag):
+            letter = ' '
+            clue = verifyMatch(word,game)
+            for w in clue:
+                print(w, end="")
+            print()
+            counterLives(lives)
+            # Ve
+            if lives <= 0:
+                print(HANGMANPICS[6])
+                break
+            print(HANGMANPICS[6-lives])
+            if '_' not in clue:
+                print(f"You have won the game, the word was: {word}")
+                break
+            while(letter in game):
+                letter = input("Type a letter for the hangman:")
+            game.append(letter)
+            if letter not in word:
+                lives -= 1
+            clearScreen()
+    except KeyboardInterrupt:
+        print("Game interrupted manually... ")
+    except FileNotFoundError:
+        if not os.path.isfile(file_path):
+            print("File 'words_hangman.txt' not found, please verify the path.")
+        else: 
+            print("If you changed the source file for words, please check it.")
+    except IndexError:
+        print("Words from file corrupted, please check the list and format.")
     print("Hope you enjoyed the game")
+    
         
 
 if __name__ == "__main__":
