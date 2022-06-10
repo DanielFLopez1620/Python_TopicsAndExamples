@@ -1,3 +1,8 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python/
+"""
+
 text = input("Type something: ")
 print("You type: ", text)
 print("Each input is a String and you need casting to use other types: ")

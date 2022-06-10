@@ -1,3 +1,8 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python/
+"""
+
 # Welcome to Python
 print("Hello World...")
 print("To show messages in python you use print")

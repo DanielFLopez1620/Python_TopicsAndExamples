@@ -1,13 +1,22 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python/
+"""
+
 print("Let's see the slicing and some booleans methods:\nSLICING:")
 example = "Python is awesome"
-print(f"example[3:6] = {example[3:6]}")
-print(f"example[2:8] = {example[2:8]}")
-print(f"example[3:6:-1] = {example[3:6:-1]}")
-print(f"example[::-1] = {example[::-1]}")
-print(f"example[::2] = {example[::2]}")
-print("-"*30)
-print("BOOLEAN METHODS:")
-#Examples strings:
+print(
+    f"""
+    example[3:6] = {example[3:6]}
+    example[2:8] = {example[2:8]}
+    example[3:6:-1] = {example[3:6:-1]}
+    example[::-1] = {example[::-1]}
+    example[::2] = {example[::2]}
+{"-" * 30}
+BOOLEAN METHODS:
+    """
+)
+# Examples strings:
 str1 = "HELLO"
 str2 = "h1"
 str3 = "hi :)"
@@ -31,6 +40,3 @@ print(f"'{str2}' is lowercase?: {str2.islower()}\n")
 
 print(f"'{str5}' is space: {str5.isspace()}")
 print(f"'{str4}' is alpha?: {str4.isspace()}\n")
-
-
-
