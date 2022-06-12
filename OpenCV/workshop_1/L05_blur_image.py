@@ -1,0 +1,22 @@
+import cv2
+from path_helps import get_path
+
+def main():
+    my_img = "pexels-sharing.jpg"
+    folder = "resources"
+    file_path = get_path(my_img, folder)
+
+    image = cv2.imread(file_path)
+
+    imgGray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+
+    # Make a blur 
+    # Gaussian Blur params: cv2 image , Kernel (odd numbers rectangle), Sigma. 
+    imgBlur = cv2.GaussianBlur(imgGray,(9,9),0)
+
+    cv2.imshow("BlurImage", imgBlur)
+    cv2.waitKey(0)
+
+
+if __name__ == '__main__':
+    main()
