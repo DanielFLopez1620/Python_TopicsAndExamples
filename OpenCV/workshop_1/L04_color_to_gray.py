@@ -3,7 +3,7 @@ from path_helps import get_path
 
 def main():
     # Obtain path of the file
-    my_img = "pexels-sharing.jpg"
+    my_img = "pexels_sharing.jpg"
     folder = "resources"
     file_path = get_path(my_img, folder)
 

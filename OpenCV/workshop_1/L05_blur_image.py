@@ -2,12 +2,15 @@ import cv2
 from path_helps import get_path
 
 def main():
-    my_img = "pexels-sharing.jpg"
+    # Obtain path of image
+    my_img = "pexels_sharing.jpg"
     folder = "resources"
     file_path = get_path(my_img, folder)
 
+    # Read image
     image = cv2.imread(file_path)
 
+    # Convert image to gray scale
     imgGray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
 
     # Make a blur 
