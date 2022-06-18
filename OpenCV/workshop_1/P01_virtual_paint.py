@@ -5,7 +5,7 @@ import numpy as np
 def getContour2Paint(image):
     x, y, w, h = 0, 0, 0, 0
     contours, hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
-    for i, cnt in enumerate(contours):
+    for cnt in contours:
         area = cv2.contourArea(cnt)
         if area > 500:
             # cv2.drawContours(image, cnt, -1, (255,0,0), 3)
@@ -16,8 +16,14 @@ def getContour2Paint(image):
     # return image
   
 
+def drawAndPaint(image, colorPoints, colorBGR):
+    for i, point in enumerate(colorPoints):
+        cv2.circle(image, (point[0], point[1]), 10, colorBGR[i], cv2.FILLED)
+    return image
 
-def paintColor(image, colorsHSV, colorList, colorBGR):
+
+def paintColor(image, colorsHSV, colorBGR):
+    points = [] ## [x, y, color] of each color
     for i, color in enumerate(colorsHSV):
         imgHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
         lower = np.array( color[0:3])
@@ -26,8 +32,10 @@ def paintColor(image, colorsHSV, colorList, colorBGR):
         # cv2.imshow(str(colorList[i]), mask)
         x, y = getContour2Paint(mask)
         cv2.circle(image, (x,y), 10, colorBGR[i], cv2.FILLED)
-        # finalImage = getContours(mask)
-        return image
+        if x != 0 and y != 0:
+            points.append([x ,y, i])
+    return drawAndPaint(image, points, colorBGR)
+
 
 
 def main():
@@ -40,7 +48,8 @@ def main():
     colorBGR = [[51, 153, 255],
         [255, 0, 255],
         [0, 255, 0]]
-    colorList = ("Orange", "Purple", "Green")
+    
+    # colorList = ("Orange", "Purple", "Green")
     # Capture video of the default web cam
     video = cv2.VideoCapture(0)
 
@@ -58,13 +67,14 @@ def main():
         success, fotogram = video.read()
         
         # Identify colors
-        imgPainted = paintColor(fotogram, colorsPaints, colorList, colorBGR)
+        imgPainted = paintColor(fotogram, colorsPaints, colorBGR)
         cv2.imshow("Video_Example", fotogram)
         cv2.imshow("Painted_Board", imgPainted)
 
         # Option to stop the reproduction
         if cv2.waitKey(1) and 0xFF == ord('q'):
             break
+    # TODO: Comment functions and verify colors
 
 
 if __name__ == '__main__':
