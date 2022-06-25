@@ -3,6 +3,13 @@ import numpy as np
 
 
 def getContour2Paint(image):
+    """
+    Obtain the position of the paint depending on the color
+
+    image --> Image masked to identify the colors
+    return (x-w)//2 --> X position of the pincel in image
+    return y --> Y position of the pincel in image
+    """
     x, y, w, h = 0, 0, 0, 0
     contours, hierarchy = cv2.findContours(image, cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)
     for cnt in contours:
@@ -17,12 +24,28 @@ def getContour2Paint(image):
   
 
 def drawAndPaint(image, colorPoints, colorBGR):
+    """
+    Add the pencil markers (draw) to the board
+
+    image --> Original fotogram/image read
+    colorPoints --> Array of points to paint
+    colorBGR --> Array that indicates the correspond color in BGR
+    return image --> Image painted
+    """
     for point in colorPoints:
         cv2.circle(image, (point[0], point[1]), 10, colorBGR[point[2]], cv2.FILLED)
     return image
 
 
 def paintColor(image, colorsHSV, colorBGR):
+    """
+    Obtaine the points to paint and the correspondent color to each point
+
+    image --> Original image/fotogram read
+    colorHSV --> Array of the color pattern to apply as filter
+    colorBGR --> Arrray that indicates the correspondent color in BGR
+    return points --> Points of markers/pincels read with the webcam
+    """
     colorList = ("Orange", "Purple", "Green")
     points = [] ## [x, y, color] of each color
     imgHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -83,7 +106,6 @@ def main():
         # Option to stop the reproduction
         if cv2.waitKey(1) and (0xFF == ord('q') or not success):
             break
-    # TODO: Comment functions and verify colors
     # TODO: Fix the x-axis orientation
 
 
