@@ -19,7 +19,6 @@ def main():
         # Convert and read sequence
         success, fotogram = video.read()
         
-        
         # Preprocess image
         imgGray = cv2.cvtColor(fotogram, cv2.COLOR_BGR2GRAY)
 
@@ -33,7 +32,7 @@ def main():
                 cv2.rectangle(fotogram, (x,y), (x+w,y+h), (255,255,0), 3)
                 cv2.putText(fotogram, "Plate detected", (x,y-5), 
                              cv2.FONT_HERSHEY_COMPLEX_SMALL, 1, color, 2)
-                imgCrop = fotogram[u:y+h, x:x+w]
+                imgCrop = fotogram[y:y+h, x:x+w]
                 cv2.imshow("Detected", imgCrop)
         
         # Option to stop the reproduction
