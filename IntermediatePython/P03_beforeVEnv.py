@@ -1,15 +1,20 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python-intermedio/
+"""
+
 print(
     """
-A virtual environment (venv) is a space where you can work an exclusive python 
-version/space with its own modules that if you update, it won't affect 
+A virtual environment (venv) is a space where you can work an exclusive python
+version/space with its own modules that if you update, it won't affect
 your local computer versions.
 Let's use it:
 FOR DEBIAN OR UBUNTU:
-    * Prerrequistes/Installation: 'sudo apt install python3-env' or 
+    * Prerrequistes/Installation: 'sudo apt install python3-env' or
       'sudo apt install python3.8-venv'
     * Initialize Venv: 'python3 -m venv venv'
     * Activate Venv: 'source venv/bin/activate'
-FOR WINDOWS: 
+FOR WINDOWS:
     * Make sure you have installed python3 with venv
     * Initialize Venv: 'py -m venv venv'
     * Activate Venv: '.\\venv\Scripts\\activate'
@@ -24,7 +29,7 @@ PIP: Package Installer for Python
 
 FINAL NOTES:
     - The next lessons would be in the "LessonsInVenv" directory, you will not
-    see the venv/ directory here as it is specified to be ignored in 
+    see the venv/ directory here as it is specified to be ignored in
     the .gitignore, you should try and create a Venv for use them, the first
     initial dependency is 'Python-3.8', others will be specified later.
 """
