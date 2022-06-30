@@ -24,7 +24,7 @@ def main():
     # Display image
     cv2.imshow("Output", image)
     cv2.waitKey(0);
-
+    # TODO: Change base face
 
 if __name__ == '__main__':
     main()

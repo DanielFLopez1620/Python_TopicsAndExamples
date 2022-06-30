@@ -1,9 +1,16 @@
+"""
+Author: Daniel Lopez
+Info from: Murtaza's Work - Robotics and AI
+--> https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5
+"""
+
 import cv2
 import numpy as np
 
+
 def main():
     # Create a new matrix (black image)
-    image = np.zeros((512,512,3), np.uint8)
+    image = np.zeros((512, 512, 3), np.uint8)
     cv2.imshow("Black_Image", image)
     cv2.waitKey(0)
 
@@ -18,7 +25,6 @@ def main():
     cv2.imshow("First_Collage", image)
     cv2.waitKey(0)
 
-    
 
 if __name__ == "__main__":
     main()

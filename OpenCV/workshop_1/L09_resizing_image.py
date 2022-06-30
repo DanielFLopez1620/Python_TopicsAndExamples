@@ -1,6 +1,12 @@
+"""
+Author: Daniel Lopez
+Info from: Murtaza's Work - Robotics and AI
+--> https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5
+"""
 
 import cv2
 from path_helps import get_path
+
 
 def main():
     # Obtain path of the image
@@ -10,10 +16,10 @@ def main():
 
     # Read image with cv2
     image = cv2.imread(file_path)
-    
+
     # Display info of the image (size)
     print(f"Original image: {image.shape}\n(height, width, channels)")
-    
+
     # Resize the image, params: (image to resize, (width, heigh))
     resize = cv2.resize(image, (300, 200))
     print(f"Resized image: {image.shape}")
@@ -22,8 +28,8 @@ def main():
     cv2.imshow("Image_Resize", resize)
 
     # Generate a delay
-    cv2.waitKey(0);
+    cv2.waitKey(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

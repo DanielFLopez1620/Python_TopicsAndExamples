@@ -1,5 +1,12 @@
+"""
+Author: Daniel Lopez
+Info from: Murtaza's Work - Robotics and AI
+--> https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5
+"""
+
 import cv2
 from path_helps import get_path
+
 
 def main():
     # Obtain path of the file
@@ -11,12 +18,12 @@ def main():
     image = cv2.imread(file_path)
 
     # Obtain gray scales image
-    imgGray = cv2.cvtColor(image,cv2.COLOR_BGR2GRAY)
+    imgGray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
     # Display image
     cv2.imshow("GrayScale", imgGray)
     cv2.waitKey(0)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

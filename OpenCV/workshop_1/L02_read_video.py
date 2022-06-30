@@ -1,6 +1,12 @@
+"""
+Author: Daniel Lopez
+Info from: Murtaza's Work - Robotics and AI
+--> https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5
+"""
 
 import cv2
 from path_helps import get_path
+
 
 def main():
     # Obtain path of image
@@ -18,9 +24,9 @@ def main():
         cv2.imshow("Video_Example", fotogram)
 
         # Option to stop the reproduction
-        if cv2.waitKey(1) and 0xFF == ord('q'):
+        if cv2.waitKey(1) and 0xFF == ord("q"):
             break
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
