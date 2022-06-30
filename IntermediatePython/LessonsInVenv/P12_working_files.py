@@ -1,22 +1,27 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python-intermedio/
+"""
 import os
+
 
 def read_file(name):
     """
-    A function to read a file with elements organized in a list. One per 
+    A function to read a file with elements organized in a list. One per
     line. It will display the content in the terminal.
 
     name --> Path and name of the file concatenated .
     """
     content = []
-    with open(name, 'r', encoding="utf-8") as rf:
+    with open(name, "r", encoding="utf-8") as rf:
         for line in rf:
             if len(line.strip()) == 1:
                 content.append(line)
             else:
                 content.append(line[0])
-    
 
-def write_file(name,adding,format):
+
+def write_file(name, adding, format):
     """
     A function that will append or rewrite a file in format of list. The mode
     should be specified as 'a'(append) or 'w'(write).
@@ -46,9 +51,9 @@ def fill_doc(num):
 
 def main():
     print(
-    """
+        """
     There are many extensions for files... as you can see on your laptop/PC...
-    
+
     But we can classify them in:
     - TEXT: Bits and bytes that represent text, like .txt or scripts.
     - BYNARY: Contain information related to images, videos, sound...
@@ -62,7 +67,7 @@ def main():
     -->Basic line to manage file:
     with open("./path/of/file.txt", "<mode>") as <abr>:
         [Process with file]
-    You can add a thir parameter, 'encoding="utf-8"' to specify region. 
+    You can add a thir parameter, 'encoding="utf-8"' to specify region.
 
     """
     )
@@ -70,7 +75,7 @@ def main():
     file_path = os.getcwd()
     file_path = os.path.join(file_path, "IntermediatePython")
     file_path = os.path.join(file_path, "LessonsInVenv")
-    direct = os.path.join(file_path ,"PracticeFiles")
+    direct = os.path.join(file_path, "PracticeFiles")
     print(f"Directory: {direct}")
 
     # Creation of folder if it doesn't exist.
@@ -83,21 +88,21 @@ def main():
     # Specify the name of the file to read/write.
     print("READING/WRITING EXAMPLE: ")
     file_name = input("Type the name of the file to interact: ")
-    final_path = os.path.join(direct,file_name)
+    final_path = os.path.join(direct, file_name)
 
     # Specify mode and do the correspondent action.
     opt = input("Do you want to read (r) or write (w) the file?: ")
     if os.path.isfile(final_path):
-        if opt == 'r':
+        if opt == "r":
             read_file(final_path)
-        elif opt == 'w':
+        elif opt == "w":
             num = int(input("How many lines would you like to add?: "))
             info = fill_doc(num)
-            write_file(final_path, info, 'a')
-    elif opt == 'w':
+            write_file(final_path, info, "a")
+    elif opt == "w":
         num = int(input("How many lines would you like to write?: "))
         info = fill_doc(num)
-        write_file(final_path, info, 'a')
+        write_file(final_path, info, "a")
     else:
         print("File not found, please verify directory...")
 

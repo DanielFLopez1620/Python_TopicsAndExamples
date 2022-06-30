@@ -1,5 +1,12 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python-cs/
+"""
+
 # Definition of functions:
-def substract(num1,num2):
+
+
+def substract(num1, num2):
     """Substract two numbers
 
     num1 int
@@ -10,7 +17,7 @@ def substract(num1,num2):
     return num1 - num2
 
 
-def applyArithmetic(function,values):
+def applyArithmetic(function, values):
     """Apply an arithmetic function with two params
 
     function int function with two parasm
@@ -21,9 +28,21 @@ def applyArithmetic(function,values):
     result = function(values[0], values[1])
     return float(result)
 
-print("You can use functions as arguments in other functions let's see and example:")
-print("Let's practice with the values 3 and 5 for the declared function: \n" , applyArithmetic(substract,[3,5]))
 
-duplicate = lambda word,num : str(word)*num 
-print("There is another type of function called lambdas, that are functions in expression: ")
-print(f"For example, let's use duplicate with 'Yes' and 3:\n{duplicate('Yes',3)}")
+print(
+    f"""
+    You can use functions as arguments in other functions let's see and
+    example:
+    Let's practice with the values 3 and 5 for the declared function:
+    {applyArithmetic(substract,[3,5])}
+    """
+)
+
+duplicate = lambda word, num: str(word) * num
+print(
+    f"""
+    There is another type of function called lambdas, that are functions in
+    expression:
+    For example, let's use duplicate with 'Yes' and 3:\n{duplicate('Yes',3)}
+    """
+)

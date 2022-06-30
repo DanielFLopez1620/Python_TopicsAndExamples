@@ -1,3 +1,8 @@
+"""
+Author: Daniel Lopez
+Info from: https://platzi.com/cursos/python-intermedio/
+"""
+
 import os
 print("-"*20)
 import this
