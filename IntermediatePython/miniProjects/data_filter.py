@@ -1,5 +1,3 @@
-
-
 # A list of employers with its personal data:
 DATA = [
     {
@@ -130,6 +128,6 @@ def main():
     for devs in range(len(js_devs)):
         print(f"Developer #{devs}: {js_devs[devs]}")
 
-
+    #TODO: Finish the challenge of comprehension vs lambda and high func.
 if __name__ == "__main__":
     main()

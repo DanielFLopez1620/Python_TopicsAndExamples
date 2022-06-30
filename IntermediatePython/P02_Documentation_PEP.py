@@ -48,7 +48,7 @@ But, let's see a short version of PEP8 conventions:
     - Use # for each line you want to comment
     - For inline comments refer to the line statment, do not explain the
      obvious and use two or more spaces to separate the comment.
-    - Use docummentation strings to explain the function (resume, params
+    - Use documentation strings to explain the function (resume, params
     and returns).If it is only one line, close it in the same line.
 8. Adding (or not) whitespaces:
     - Surround binary, assignment and comparison operators with a single
@@ -57,7 +57,7 @@ But, let's see a short version of PEP8 conventions:
     - Avoid spaces before a comma, semicolon, colon or next/before a 
     braces, parentheses or bracket.
 9. Programming recommendations:
-    - Do not comare Boolean values with True or False.
+    - Do not compare Boolean values with True or False.
     - Empty sequences are false in the if statements.
     - Do not use a variable to compare with None.
     - Use string methods rather than slicing.
