@@ -1,3 +1,9 @@
+"""
+Author: Daniel Lopez
+Info from: Murtaza's Work - Robotics and AI
+--> https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5
+"""
+
 import cv2
 import numpy as np
 from joining_images import stackImages
