@@ -13,7 +13,7 @@ from path_helps import get_path
 import numpy as np
 
 def main():
-    # Definitions
+    # Definitions of variables and lists
     width_cam, height_cam = 1280, 720
     slideNumber = 0
     multiplier = 1
@@ -22,6 +22,11 @@ def main():
     buttonPressed = False
     buttonCounter = 0
     buttonDelay = 40
+    widthConstraint = 30
+    heightConstraint = 150
+    annotations = []
+    annotationNumber = -1
+    annotationStart = False
 
     # List of images
     # TODO: Indicate the path and add files order
@@ -70,11 +75,19 @@ def main():
             fingerIndex = lmList[8][0], lmList[8][1]
 
             # Constraint values for using index finger
-            xVal = np.interp(lmList[8][0], (width_cam // 2, width_cam), [0, width_cam])
-            # <--
+            xPos = int(np.interp(lmList[8][0], 
+                                 (width_cam // 2, width_sli-widthConstraint),
+                                 [0, width_cam]))
+            yPos = int(np.interp(lmList[8][1],
+                                 (heightConstraint, height_sli-heightConstraint), 
+                                 [0, height_cam]))         
+            fingerIndex = xPos, yPos
 
             # Verify if the gesture is in the correct region
             if center_y <= gestureThreshold:
+                annotations = []
+                annotationNumber = -1
+                annotationStart = False
                 # Gesture 1: Change to previous slide
                 if fingersUp == [1, 0, 0, 0, 0]:
                     if slideNumber > 0:
@@ -88,9 +101,36 @@ def main():
                     slideNumber +=1
                     buttonPressed = True
 
-            # Gesture 3: Show Pointer
+            # Gesture 3: Show a pointer
             if fingersUp == [0, 1, 1, 0, 0]:
+                annotationStart = False
                 cv2.circle(currentSlide, fingerIndex, 12, (0,0,255), cv2.FILLED)
+                
+            # Gesture 4: Draw on slide
+            if fingersUp == [0, 1, 0, 0, 0]:
+                if not annotationStart:
+                    annotationStart = True
+                    annotationNumber += 1
+                    annotations.append([])
+                cv2.circle(currentSlide, fingerIndex, 12, (0,0,0), cv2.FILLED)
+                annotations[annotations].append(fingerIndex)
+            else:
+                annotationStart = False
+            
+            # Gesture 5: Erase last draw
+            if fingersUp == [0, 1, 1, 1, 0]:
+                if annotations and annotationNumber > 1:
+                    annotations.pop(-1)
+                    annotationNumber -= 1
+                    buttonPressed = True
+        else:
+            annotationStart = False
+        
+        # Draw the annotations
+        for lst in range(len(annotations)):
+            for ind in range(len(annotations[lst])):
+                if ind != 0:
+                    cv2.line(currentSlide, annotations[ind - 1], annotations[ind])
 
         # Verify button and the iterations, make a delay
         if buttonPressed:
