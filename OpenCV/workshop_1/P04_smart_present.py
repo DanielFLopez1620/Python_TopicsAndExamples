@@ -4,20 +4,20 @@ Author: Murtaza's Work - Robotics and AI
 
 Modified and commented by: Daniel Lopez
 """
-#TODO: Install dependencies in Ubuntu
 
 import cv2
 import os
 from cvzone.HandTrackingModule import HandDetector
-from path_helps import get_path
+from path_helps import get_path_dir
 import numpy as np
+
 
 def main():
     # Definitions of variables and lists
     width_cam, height_cam = 1280, 720
     slideNumber = 0
     multiplier = 1
-    width_min, height_min = int(213 * multiplier), int(120 * multiplier)
+    width_min, height_min = int(320 * multiplier), int(180 * multiplier)
     gestureThreshold = 300
     buttonPressed = False
     buttonCounter = 0
@@ -29,10 +29,11 @@ def main():
     annotationStart = False
 
     # List of images
-    # TODO: Indicate the path and add files order
-    folderPath = ""
-    pathImages = os.listdir()
-    slidePath = "" 
+    mainFolder = "resources"
+    slidesFolder = "example_presentation"
+    folderPath = get_path_dir(mainFolder, slidesFolder)
+    slidesPath = sorted(os.listdir(folderPath))
+    print(f"Slides: {slidesPath}")
 
     # Capture webcam video
     webcam = cv2.VideoCapture(0)
@@ -48,13 +49,12 @@ def main():
         fotogram = cv2.flip(fotogram, 1)
 
         # Import slides
-        # TODO: Joint path of inage
-        currentSlidePath = ""
+        currentSlidePath = os.path.join(folderPath, slidesPath[slideNumber])
         currentSlide = cv2.imread(currentSlidePath)
 
         # Adding webcam image on slide
-        camWindow = cv2.resize(fotogram, (width_cam, height_min))
-        height_sli, width_sli = currentSlide.shape
+        camWindow = cv2.resize(fotogram, (width_min, height_min))
+        height_sli, width_sli, _ = currentSlide.shape
         currentSlide[0 : height_min,
                      width_sli - width_min: width_sli] = camWindow
         
@@ -107,6 +107,7 @@ def main():
                 cv2.circle(currentSlide, fingerIndex, 12, (0,0,255), cv2.FILLED)
                 
             # Gesture 4: Draw on slide
+            # TODO: Correct finger drawings
             if fingersUp == [0, 1, 0, 0, 0]:
                 if not annotationStart:
                     annotationStart = True
