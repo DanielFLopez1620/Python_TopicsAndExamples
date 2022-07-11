@@ -114,7 +114,7 @@ def main():
                     annotationNumber += 1
                     annotations.append([])
                 cv2.circle(currentSlide, fingerIndex, 12, (0,0,0), cv2.FILLED)
-                annotations[annotations].append(fingerIndex)
+                annotations[annotationNumber].append(fingerIndex)
             else:
                 annotationStart = False
             
