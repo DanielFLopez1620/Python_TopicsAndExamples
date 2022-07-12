@@ -24,7 +24,7 @@ def main():
     buttonDelay = 40
     widthConstraint = 30
     heightConstraint = 150
-    annotations = []
+    annotations = [[]]
     annotationNumber = -1
     annotationStart = False
 
@@ -107,7 +107,6 @@ def main():
                 cv2.circle(currentSlide, fingerIndex, 12, (0,0,255), cv2.FILLED)
                 
             # Gesture 4: Draw on slide
-            # TODO: Correct finger drawings
             if fingersUp == [0, 1, 0, 0, 0]:
                 if not annotationStart:
                     annotationStart = True
@@ -127,18 +126,18 @@ def main():
         else:
             annotationStart = False
         
-        # Draw the annotations
-        for lst in range(len(annotations)):
-            for ind in range(len(annotations[lst])):
-                if ind != 0:
-                    cv2.line(currentSlide, annotations[ind - 1], annotations[ind])
-
         # Verify button and the iterations, make a delay
         if buttonPressed:
             buttonCounter += 1
             if buttonCounter > buttonDelay:
                 buttonCounter = 0
                 buttonPressed = False
+        
+        # Draw the annotations
+        for lst in range(len(annotations)):
+            for ind in range(len(annotations[lst])):
+                if ind != 0:
+                    cv2.line(currentSlide, annotations[lst][ind - 1], annotations[lst][ind], (0, 0, 0), 5)
 
         # Show video by fotograms and the presentation
         cv2.imshow("Video", fotogram)

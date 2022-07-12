@@ -6,11 +6,13 @@ Remember, you will learn to code by doing, to only by seen a video.
 Never stop learning!
 
 ## Source: 
-This workshop is mainly based on the video 
-[LEARN OPENCV in 3 HOURS with Python](https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5) from the channel 
+This workshop is mainly based on the videos from the channel 
 [Murtaza's Workshop - Robotics and AI](https://www.youtube.com/c/MurtazasWorkshopRoboticsandAI)
-Additional, you can find variants of the projects listed here:
- - Example
+The videos related to the projects and lessons are shown here:
+ - L01-L20: [LEARN OPENCV in 3 HOURS with Python](https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5)
+ - L22: [Multiple Hand Gesture Control with OpenCV Python](https://youtu.be/3xfOa4yeOb0?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5)
+ - P01-P03: [LEARN OPENCV in 3 HOURS with Python](https://youtu.be/WQeoO7MI0Bs?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5)
+ - P04: [Hand Gesture Presentation](https://youtu.be/CKmAZss-T5Y?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5)
 
 ## Version:
 This workshop was made and proved with python 3.8, so make sure your path and language configuration is related to this version. But version 3.9 works too.
