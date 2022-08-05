@@ -1,10 +1,11 @@
 import pandas as pd
 from openpyxl import Workbook, load_workbook
 from openpyxl.chart import BarChart, Reference
+import string
 
 # TODO: Generate functions for pandas and openpyxl
 def main():
-    # PANDA SECTION 1:
+    # PANDA SECTION:
     # Import data from Excel
     # FIXME: Add path to the mini project
     data_file = "supermarket_sales.xlsx"
@@ -17,7 +18,7 @@ def main():
     # Export to Excel:
     data_resume.to_excel("sales_2022.xlsx", startrow=4,sheet_name="Report")
 
-    # OPENPYXL SECTION 1:
+    # OPENPYXL SECTION:
     # Reading data from Excel:
     excel_data = load_workbook("sales_2022.xlsx")
     excel_sheet = excel_data["Report"]
@@ -28,8 +29,37 @@ def main():
     min_row = excel_data.active.min_row
     max_row = excel_data.active.max_row
 
-    # Insert a graphic:
-    # barchat = BarChart() <-- Continue here
+    # Get reference for a graphic
+    barchart = BarChart()
+    data = Reference(excel_sheet, min_col=min_column+1, max_col=max_column, min_row = min_row, max_row = max_row)
+    info = Reference(excel_sheet, min_col=min_column, max_col=min_column, min_row = min_row+1, max_row = max_row)
+    
+    # Add data and categories to the graphic
+    barchart.add_data(data, titles_from_data=True)
+    barchart.insert_categories(info)
+
+    # Insert and edit style of the graphic
+    excel_sheet.add_chart(barchart, "B12")
+    barchart.style = 5
+    barchart.title = "Sells"
+    
+    # Insert formula and format in specific cell
+    excel_sheet["B8"] = "=SUM(B6:B7)"
+    excel_sheet["B8"].style = "Currency"
+
+    # Adding format to multiples cell
+    letters = list(string.ascii_uppercase)
+    letters_excel = letters[0:max_column]
+    for i in letters_excel:
+        if i == "A":
+            continue
+        excel_sheet[f"{i}{max_column+1}"].style = "Currency"
+        excel_sheet[f"{i}{max_column+1}"] = f"=SUM({min_column+1}:{max_column})"
+
+
+    # Save barchart into the excel sheet and document
+    excel_data.save("sales_2022.xlsx")
+
 
 
 if __name__ == "__main__":
