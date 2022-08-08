@@ -1,14 +1,18 @@
+from importlib.resources import path
+import openpyxl
 import pandas as pd
 from openpyxl import Workbook, load_workbook
 from openpyxl.chart import BarChart, Reference
+from openpyxl.styles import Font
 import string
+from path_helps import get_path_dir
+import os
 
-# TODO: Generate functions for pandas and openpyxl
 def main():
     # PANDA SECTION:
     # Import data from Excel
-    # FIXME: Add path to the mini project
-    data_file = "supermarket_sales.xlsx"
+    path_file = get_path_dir("TasksAutomatization", "AutoReport")
+    data_file = os.path.join(path, "supermarket_sales.xlsx")
     data_imported = pd.read_excel(data_file)
     data_imported[["Gender", "Product line", "Total"]]
 
@@ -55,7 +59,13 @@ def main():
             continue
         excel_sheet[f"{i}{max_column+1}"].style = "Currency"
         excel_sheet[f"{i}{max_column+1}"] = f"=SUM({min_column+1}:{max_column})"
+    excel_sheet[f'{letters_excel[0]}{max_row+1}'] = "Total"
 
+    # Add format to the Excel file
+    excel_sheet["A1"] = "Report"
+    excel_sheet["A2"] = "2022"
+    excel_sheet["A1"].font = Font("Arial", bold=True, size=20 )
+    excel_sheet["A2"].font = Font("Arial", bold=True, size=12 )
 
     # Save barchart into the excel sheet and document
     excel_data.save("sales_2022.xlsx")
