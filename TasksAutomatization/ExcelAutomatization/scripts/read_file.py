@@ -1,4 +1,3 @@
-from traceback import print_tb
 import pandas as pd
 from path_helps import get_path
 
@@ -22,6 +21,19 @@ def main():
     # Print the info of some values of a given column
     print(f"Payment Info:{dataframe['Payment'].head(5)}")
 
+    # Print a preview of the head of the different data
+    data_columns = dataframe.columns
+    for col in data_columns:
+        print(dataframe[col].head(5))
+
+    # Select and filter info
+    dataframe[dataframe["Payment"]== "Cash"]
+    print(dataframe["Payment"])
+
+    # Export data
+    csv_name = "payment_report.csv"
+    csv_path = get_path(csv_name, "input")
+    dataframe.to_csv(csv_path, "output", sep= ",", header = True, index = False)
 
 if __name__ == "__main__":
     main()
