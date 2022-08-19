@@ -1,3 +1,8 @@
+"""
+Code by: Frank Andrade
+https://www.youtube.com/watch?v=PqiwVp53ftU&list=PLxYZ6JuFZuoYsbJuR_ukb0w1Yz4HlUq_c&index=10&t=1037s
+Modified and commented by: Daniel Lopez
+"""
 from importlib.resources import path
 import openpyxl
 import pandas as pd

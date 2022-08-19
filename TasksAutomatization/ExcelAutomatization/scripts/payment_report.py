@@ -7,6 +7,7 @@ Modified and commented by: Daniel Lopez
 import pandas as pd
 from path_helps import get_path
 
+
 def read_file(excel_name):
     """
     Read an Excel file using pandas
@@ -18,10 +19,10 @@ def read_file(excel_name):
     if not excel_name.endswith(".xlsx"):
         excel_name += ".xlsx"
     excel_path = get_path(excel_name, "input")
-    
-    input_cols = [i for i in range(3,8)].append(12)
 
-    dataframe = pd.read_excel(excel_path, "Sheet 1", header = 0, usecols=input_cols)
+    input_cols = [i for i in range(3, 8)].append(12)
+
+    dataframe = pd.read_excel(excel_path, "Sheet 1", header=0, usecols=input_cols)
     return dataframe
 
 
@@ -35,7 +36,7 @@ def filter_info(dataframe, category, filter):
     Output:
         dataframe --> Data of the Excel read but filtered
     """
-    dataframe[dataframe[category]== filter]
+    dataframe[dataframe[category] == filter]
     print(f"Results of the filter:\n{dataframe[category]}")
     return dataframe
 
@@ -48,7 +49,8 @@ def export_csv(dataframe):
     """
     csv_name = "payment_report.csv"
     csv_path = get_path(csv_name, "output")
-    dataframe.to_csv(csv_path, "output", sep= ",", header = True, index = False)
+    dataframe.to_csv(csv_path, "output", sep=",", header=True, index=False)
+
 
 def main():
     """
@@ -58,9 +60,9 @@ def main():
     dataframe = read_file(excel_name)
 
     dataframe = filter_info(dataframe, "Payment", "Cash")
-    
+
     export_csv(dataframe)
-   
+
 
 if __name__ == "__main__":
     main()

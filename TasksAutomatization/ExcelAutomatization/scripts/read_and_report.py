@@ -1,5 +1,12 @@
+"""
+Base code by: DATA SCIENCE PROJECT
+Link: https://youtu.be/JL9RMCS4Sho?list=PLxYZ6JuFZuoYsbJuR_ukb0w1Yz4HlUq_c
+Modified and commented by: Daniel Lopez
+"""
+
 import pandas as pd
 from path_helps import get_path
+
 
 def main():
     # Get path of the Excel File
@@ -7,12 +14,12 @@ def main():
     if not excel_name.endswith(".xlsx"):
         excel_name += ".xlsx"
     excel_path = get_path(excel_name, "input")
-    
+
     # Specify columns to read
-    input_cols = [i for i in range(3,8)].append(12)
+    input_cols = [i for i in range(3, 8)].append(12)
 
     # Open and read the file (and the given sheet) with pandas
-    dataframe = pd.read_excel(excel_path, "Sheet 1", header = 0, usecols=input_cols)
+    dataframe = pd.read_excel(excel_path, "Sheet 1", header=0, usecols=input_cols)
 
     # Receive the size of the table/data
     print(f"Size: {dataframe.shape}")
@@ -27,13 +34,14 @@ def main():
         print(dataframe[col].head(5))
 
     # Select and filter info
-    dataframe[dataframe["Payment"]== "Cash"]
+    dataframe[dataframe["Payment"] == "Cash"]
     print(dataframe["Payment"])
 
     # Export data
     csv_name = "payment_report.csv"
     csv_path = get_path(csv_name, "input")
-    dataframe.to_csv(csv_path, "output", sep= ",", header = True, index = False)
+    dataframe.to_csv(csv_path, "output", sep=",", header=True, index=False)
+
 
 if __name__ == "__main__":
     main()
