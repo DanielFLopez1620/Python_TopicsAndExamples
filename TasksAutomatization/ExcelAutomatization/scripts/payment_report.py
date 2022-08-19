@@ -1,3 +1,9 @@
+"""
+Base code by: DATA SCIENCE PROJECT
+Link: https://youtu.be/JL9RMCS4Sho?list=PLxYZ6JuFZuoYsbJuR_ukb0w1Yz4HlUq_c
+Modified and commented by: Daniel Lopez
+"""
+
 import pandas as pd
 from path_helps import get_path
 
@@ -35,16 +41,24 @@ def filter_info(dataframe, category, filter):
 
 
 def export_csv(dataframe):
-    # Export data
+    """
+    Export data from the dataframe to a csv_file
+    Input:
+        dataframe --> Data of the Excel you want to export
+    """
     csv_name = "payment_report.csv"
-    csv_path = get_path(csv_name, "input")
+    csv_path = get_path(csv_name, "output")
     dataframe.to_csv(csv_path, "output", sep= ",", header = True, index = False)
 
 def main():
+    """
+    Generate a report of a supermarket, according to the payment option.
+    """
     excel_name = input("Type the Excel File name to read:")
     dataframe = read_file(excel_name)
 
     dataframe = filter_info(dataframe, "Payment", "Cash")
+    
     export_csv(dataframe)
    
 
