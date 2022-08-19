@@ -5,22 +5,24 @@ from openpyxl import Workbook, load_workbook
 from openpyxl.chart import BarChart, Reference
 from openpyxl.styles import Font
 import string
-from path_helps import get_path_dir
+from path_helps import get_path_file
 import os
+
 
 def main():
     # PANDA SECTION:
     # Import data from Excel
-    path_file = get_path_dir("TasksAutomatization", "AutoReport")
-    data_file = os.path.join(path, "supermarket_sales.xlsx")
-    data_imported = pd.read_excel(data_file)
+    path_file = get_path_file("supermarket_sales.xlsx")
+    data_imported = pd.read_excel(path_file)
     data_imported[["Gender", "Product line", "Total"]]
 
     # Create pivot table:
-    data_resume = data_imported.pivot_table(index="Gender", columns="Product line", values="Total", aggfunci='sum').round(0)
+    data_resume = data_imported.pivot_table(
+        index="Gender", columns="Product line", values="Total", aggfunc='sum'
+    ).round(0)
 
     # Export to Excel:
-    data_resume.to_excel("sales_2022.xlsx", startrow=4,sheet_name="Report")
+    data_resume.to_excel("sales_2022.xlsx", startrow=4, sheet_name="Report")
 
     # OPENPYXL SECTION:
     # Reading data from Excel:
@@ -35,18 +37,30 @@ def main():
 
     # Get reference for a graphic
     barchart = BarChart()
-    data = Reference(excel_sheet, min_col=min_column+1, max_col=max_column, min_row = min_row, max_row = max_row)
-    info = Reference(excel_sheet, min_col=min_column, max_col=min_column, min_row = min_row+1, max_row = max_row)
-    
+    data = Reference(
+        excel_sheet,
+        min_col=min_column + 1,
+        max_col=max_column,
+        min_row=min_row,
+        max_row=max_row,
+    )
+    info = Reference(
+        excel_sheet,
+        min_col=min_column,
+        max_col=min_column,
+        min_row=min_row + 1,
+        max_row=max_row,
+    )
+
     # Add data and categories to the graphic
     barchart.add_data(data, titles_from_data=True)
-    barchart.insert_categories(info)
+    barchart.set_categories(info)
 
     # Insert and edit style of the graphic
     excel_sheet.add_chart(barchart, "B12")
     barchart.style = 5
     barchart.title = "Sells"
-    
+
     # Insert formula and format in specific cell
     excel_sheet["B8"] = "=SUM(B6:B7)"
     excel_sheet["B8"].style = "Currency"
@@ -59,17 +73,17 @@ def main():
             continue
         excel_sheet[f"{i}{max_column+1}"].style = "Currency"
         excel_sheet[f"{i}{max_column+1}"] = f"=SUM({min_column+1}:{max_column})"
-    excel_sheet[f'{letters_excel[0]}{max_row+1}'] = "Total"
+    excel_sheet[f"{letters_excel[0]}{max_row+1}"] = "Total"
 
     # Add format to the Excel file
     excel_sheet["A1"] = "Report"
     excel_sheet["A2"] = "2022"
-    excel_sheet["A1"].font = Font("Arial", bold=True, size=20 )
-    excel_sheet["A2"].font = Font("Arial", bold=True, size=12 )
+    excel_sheet["A1"].font = Font("Arial", bold=True, size=20)
+    excel_sheet["A2"].font = Font("Arial", bold=True, size=12)
 
     # Save barchart into the excel sheet and document
-    excel_data.save("sales_2022.xlsx")
-
+    output_file = get_path_file("sales_2022.xlsx")
+    excel_data.save(output_file)
 
 
 if __name__ == "__main__":

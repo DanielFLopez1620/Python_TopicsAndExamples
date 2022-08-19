@@ -5,7 +5,7 @@ Author: Daniel Lopez
 import os
 
 
-def get_path(file_name):
+def get_path_file(file_name):
     """
     Obtain all the path linked to the file, relative to workshop.
     This works when you are opening the file with VS Code from the path of
@@ -16,13 +16,13 @@ def get_path(file_name):
     return file_path --> The complete path from 'Python_TopicsAndExamples'
     """
     file_path = os.getcwd()
-    file_path = os.path.join(file_path, "OpenCV")
-    file_path = os.path.join(file_path, "workshop_1")
+    file_path = os.path.join(file_path, "TasksAutomatization")
+    file_path = os.path.join(file_path, "AutoReport")
     file_path = os.path.join(file_path, file_name)
     return file_path
 
 
-def get_path(file_name, additional_dir):
+def get_path_dir(file_name, additional_dir):
     """
     Obtain all the path linked to the file, relative to workshop.
     This works when you are opening the file with VS Code from the path of
@@ -34,8 +34,8 @@ def get_path(file_name, additional_dir):
     return file_path --> The complete path from 'Python_TopicsAndExamples'
     """
     file_path = os.getcwd()
-    file_path = os.path.join(file_path, "OpenCV")
-    file_path = os.path.join(file_path, "workshop_1")
+    file_path = os.path.join(file_path, "TasksAutomatization")
+    file_path = os.path.join(file_path, "AutoReport")
     file_path = os.path.join(file_path, additional_dir)
     file_path = os.path.join(file_path, file_name)
     return file_path
@@ -53,8 +53,8 @@ def get_path_dir(additional_dir1, additional_dir2):
     return file_path --> The complete path from 'Python_TopicsAndExamples'
     """
     file_path = os.getcwd()
-    file_path = os.path.join(file_path, "OpenCV")
-    file_path = os.path.join(file_path, "workshop_1")
+    file_path = os.path.join(file_path, "TaskAutomatization")
+    file_path = os.path.join(file_path, "AutoReport")
     file_path = os.path.join(file_path, additional_dir1)
     file_path = os.path.join(file_path, additional_dir2)
     return file_path
