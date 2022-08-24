@@ -22,9 +22,7 @@ def main():
     # Paths for data and info
     dataFolder = "data"
     dataSubFolder = "A"
-    dataPath = path_helps.get_path_dir("OpenCV", "workshop1")
-    dataPath = os.path.join(dataPath, dataFolder)
-    dataPath = os.path.join(dataPath, dataSubFolder)
+    dataPath = path_helps.get_path_dir(dataFolder, dataSubFolder)
 
     # Capture video from webcam
     webcam = cv2.VideoCapture(0)

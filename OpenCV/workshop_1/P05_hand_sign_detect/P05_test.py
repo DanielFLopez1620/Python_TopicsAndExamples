@@ -3,7 +3,7 @@ Author: Murtaza's Work - Robotics and AI
 --> https://youtu.be/wa2ARoUUdU8?list=PLxYZ6JuFZuoZPUEUtcUL0YoAYRvnNLAG5
 Modified and commented by: Daniel Lopez
 """
-# TODO: Install tensorflow
+
 import cv2
 from cvzone.HandTrackingModule import HandDetector
 from cvzone.ClassificationModule import Classifier
@@ -22,18 +22,15 @@ def main():
     labels = ["F"]
 
     # Paths for data and info
-    # FIXME: Add folder project "P05..."
     dataFolder = "data"
     dataSubFolder = "A"
     modelFolder = "model"
     modelClassifier = "keras_model.h5"
     modelTxt = "labels.txt"
-    dataPath = modelPath = path_helps.get_path_dir("OpenCV", "workshop1")
-    dataPath = os.path.join(dataPath, dataFolder)
-    dataPath = os.path.join(dataPath, dataSubFolder)
-    modelPath = modelPathTxt = os.path.join(modelPath, modelFolder)
-    modelPath = os.path.join(modelPath, modelClassifier)
-    modelPathTxt = os.path.join(modelPathTxt, modelTxt)
+    dataPath = modelPath = path_helps.get_path_dir(dataFolder, dataSubFolder)
+    # modelPath = modelPathTxt = path_helps.get_path_dir(modelFolder)
+    modelPath = path_helps.get_path(modelClassifier, modelPath)
+    modelPathTxt = path_helps.get_path(modelTxt, modelFolder)
     # Capture video from webcam
     webcam = cv2.VideoCapture(0)
 
@@ -103,7 +100,7 @@ def main():
         cv2.imshow("Video", fotogram)
         cv2.imshow("Classifier Result", imgResult)
         cv2.waitKey(1)
-        #TODO: Create model
+        #TODO: Create, import and use the model
 
 
 if __name__ == "__main__":
