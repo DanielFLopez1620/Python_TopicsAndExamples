@@ -88,3 +88,40 @@ print(insert_point.__annotations__)
 # It will display:
 # {'x':float, 'y':float, 'return':__main__.Point}
 ~~~
+
+So, the annotations become useful to generate documentation, run validations or even enforce checks in the code if required.
+
+After this, we must highlight the PEP-484 which refers to the basics of the type hinting: "Python will remain a dynamically typed language, and the authors have no desire to ever make type hints mandatory, even by convention."
+
+This means that the type hinting's purpose is to have a extra tool to check and assess the correct use of types throughout the code and help to prevent incompabilities. As here, some tools appear, like [Mypy](https://www.mypy-lang.org/).
+
+So now... a question may appear in our heads...
+
+### Annotations replace docstrings?
+
+Well... previously, types were specified in docstrings, but now, annotations make it more compressed. However, the answer to the question is more complex....
+
+So, let's keep in mind the next... types can be added by using annotations and even more information, mostly on nested/dynamic types can be added on the docstrings to improve the documentation, for example:
+
+~~~Python
+def pair_collectioning(received: dict) -> dict:
+    """
+    If the pairs are both valid strings, it will return valid dict pair.
+
+    - received : A dict with:
+    {
+        "name": "Dan" <string>
+        "gamertag": "Dan1620" <string>
+    }
+    
+    - Returns a dictionary like:
+
+    {"name": True/False}
+
+    - Raises:
+    - ValueError if the names doesn't match criteria
+    """
+    pass
+~~~
+
+Then, the final answer is... you can use both in order to improve your code.
