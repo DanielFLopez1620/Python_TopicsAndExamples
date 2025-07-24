@@ -44,7 +44,7 @@ Why not comments? Well... they can represent our failures to express our ideas i
 
 Why docstrings? It is simple, they documentate a component (module, class, method or function), where in Python one of the most important cases is related with type usage.
 
-One important aspect of the docstring is that it not only becomes part of the code, but also becomes part of a class/object via is **__doc__** attribute
+One important aspect of the docstring is that it not only becomes part of the code, but also becomes part of a class/object via is **\_\_doc\_\_** attribute
 
 ~~~bash
 def my_func():
@@ -124,4 +124,77 @@ def pair_collectioning(received: dict) -> dict:
     pass
 ~~~
 
-Then, the final answer is... you can use both in order to improve your code.
+Then, the final answer is... you can use both in order to improve your code and help understanding the implementations required behind params, args and functions or methods.
+
+## Check and tools
+
+Let's explore some useful resources to help you with the process of improving your code, where the questions to ask are:
+
+- Is your code easy to understand to others?
+- Does it shows in terms of the domain of the problem?
+- Would a new member understand the code?
+
+So, we have the next allies:
+
+### [MyPy](http://mypy-lang.org/)
+
+This tool can help you with type hinting to ensure a static type checking in Python. On one hand, it can tell you about mistypes usage or preventions. On the other hand, it can tell you abut bugs related with this type. Just keep in mind there are chances for false positives.
+
+To install it you can use:
+
+~~~bash
+# With PIP
+pip install mypy
+
+# Or you can use the package manager of your machine (in my case Ubuntu):
+sudo apt install python3-mypy
+~~~
+
+### [Pylint](https://www.pylint.org/)
+
+It will help you with reviews on your code, by checking if your code follows the PEP-8 standard (pycodestyle), or other formats like Flake8. It also allows the option to be configurable, but the default setup is complete and strict as required.
+
+You can install it with:
+
+~~~bash
+# With pip
+pip install pylint
+
+# Or you can use the package manager of your machine (in my case Ubuntu):
+sudo pat install python3-pylint-common
+~~~
+
+Then just use the comand, **pylint** and the path of the ptyhon file to get the review. To further configure you can use the *pylintrc* file.
+
+### Make
+
+You can set up for automatic check with **Makefiles**, which are files that allow you to configure and set up the compiling, running, testing and related elements of a project. This mean that you can integrate the tools presented above
+
+Let's check an example of a file *checklist*:
+
+~~~Make
+typehint:
+mypy src/ tests/
+
+test
+pytest tests/
+
+lint:
+pylint src/ tests/
+
+checklist: lint typehint test
+
+.PHONY: typehint test lint checklist
+~~~
+
+After that, you just use the make and you are done:
+
+~~~bash
+make checklist
+~~~
+
+This will check for the compliance of the PEP8, then check types and finally run the tests.
+
+### [Black](https://github.com/ambv/black)
+
+Another useful tool that you can use to check the code and even it will give format by itself.
