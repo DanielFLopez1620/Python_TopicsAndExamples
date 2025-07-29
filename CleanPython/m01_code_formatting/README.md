@@ -147,8 +147,37 @@ To install it you can use:
 pip install mypy
 
 # Or you can use the package manager of your machine (in my case Ubuntu):
-sudo apt install python3-mypy
+sudo apt install python3-mypy # or mypy
 ~~~
+
+Let's explore the case of the code [L01_check_mypy.py](/CleanPython/m01_code_formatting/L01_check_mypy.py), and review what **MyPy** has to say:
+
+~~~Python
+def greet(name : str):
+    return "Hello, " + name
+
+def add(a : int, b : int):
+    return a + b
+
+greet(123)
+print(add("5", 10))
+~~~
+
+So, we run:
+
+~~~bash
+mypy /L01_check_mypy.py
+~~~
+
+And it display us:
+
+~~~bash
+CleanPython/m01_code_formatting/L01_check_mypy.py:7: error: Argument 1 to "greet" has incompatible type "int"; expected "str"  [arg-type]
+CleanPython/m01_code_formatting/L01_check_mypy.py:8: error: Argument 1 to "add" has incompatible type "str"; expected "int"  [arg-type]
+Found 2 errors in 1 file (checked 1 source file)
+~~~
+
+So, even if the code can works, it notify us about the errors on the type management.
 
 ### [Pylint](https://www.pylint.org/)
 
@@ -165,6 +194,12 @@ sudo pat install python3-pylint-common
 ~~~
 
 Then just use the comand, **pylint** and the path of the ptyhon file to get the review. To further configure you can use the *pylintrc* file.
+
+So, let's check the example of [L02_check_pylint.py](/CleanPython/m01_code_formatting/L02_check_pylint.py):
+
+~~~Python
+
+~~~
 
 ### Make
 
@@ -193,8 +228,15 @@ After that, you just use the make and you are done:
 make checklist
 ~~~
 
-This will check for the compliance of the PEP8, then check types and finally run the tests.
+This will check for the compliance of the PEP8, then check types and finally run the tests. If one of the steps faile, consider the entire process as a failure.
 
 ### [Black](https://github.com/ambv/black)
 
-Another useful tool that you can use to check the code and even it will give format by itself.
+Another useful tool that you can use to check the code and even it will give format by itself, for example, by making sure the Strings are always in use of double-quotes and ensure the order of parameters.
+
+It may be inconvenient that this tool actually edit the codes, mostly in cases of control version. However, it helps us to focus more on the problem than worryinng about the structure.
+
+Let's check an example:
+
+d
+
