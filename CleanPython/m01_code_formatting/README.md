@@ -198,8 +198,34 @@ Then just use the comand, **pylint** and the path of the ptyhon file to get the 
 So, let's check the example of [L02_check_pylint.py](/CleanPython/m01_code_formatting/L02_check_pylint.py):
 
 ~~~Python
+x = "1"
 
+def add(a : int, b : int ):
+    return a +b
+
+print( add( x,  2 ) )
 ~~~
+
+And then review the code with:
+
+~~~bash
+pylint CleanPython/m01_code_formatting/L02_check_pylint.py
+~~~
+
+Which will warn us on the next:
+
+~~~bash
+************* Module L02_check_pylint
+CleanPython/m01_code_formatting/L02_check_pylint.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+CleanPython/m01_code_formatting/L02_check_pylint.py:1:0: C0103: Module name "L02_check_pylint" doesn't conform to snake_case naming style (invalid-name)
+CleanPython/m01_code_formatting/L02_check_pylint.py:1:0: C0103: Constant name "x" doesn't conform to UPPER_CASE naming style (invalid-name)
+CleanPython/m01_code_formatting/L02_check_pylint.py:3:0: C0116: Missing function or method docstring (missing-function-docstring)
+
+------------------------------------------------------------------
+Your code has been rated at 0.00/10 (previous run: 0.00/10, +0.00)
+~~~
+
+As shown in this case, it can highlight items related to the names (files or variables) itself, while also providing comments related to the docstrings.
 
 ### Make
 
@@ -236,7 +262,33 @@ Another useful tool that you can use to check the code and even it will give for
 
 It may be inconvenient that this tool actually edit the codes, mostly in cases of control version. However, it helps us to focus more on the problem than worryinng about the structure.
 
-Let's check an example:
+You can install *black* with:
 
-d
+~~~bash
+black L03_check_black.py
+~~~
 
+Let's check an example with the [L03_check_black.py](/CleanPython/m01_code_formatting/L03_check_black.py):
+
+~~~Python
+def say_hello(name): print("Hello,",name)
+say_hello("Bob")
+~~~
+
+So, we will ensure the format by passing it to black with:
+
+~~~bash
+black L03_check_black.py
+~~~
+
+And it return the code:
+
+~~~Python
+def say_hello(name):
+    print("Hello,", name)
+
+
+say_hello("Dan")
+~~~
+
+And that's it, you have been introduced to a clean programming, so let's continue the journey on the next modules as there is more to learn.
