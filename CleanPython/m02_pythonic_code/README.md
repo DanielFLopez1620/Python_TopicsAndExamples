@@ -132,3 +132,55 @@ try:
 finally:
     my_file.close()
 ~~~
+
+But there are simpliers mechanism like:
+
+~~~Python
+with open(filename) as fd:
+    process_file(fd)
+~~~
+
+In the case of **with**, which was introduces in the PEP-343, it enters the context manager which will open the file and will close it at the end.
+
+The context managers consist of two base methods *\_\_enter\_\_* and *\_\_exit\_\_**, which, as you may suppose, act when entering and going outside the desired scope, in the case of the **with** it would be in the openning of the file and after the processing of the file. Even in the case where exception occurs, the *\_\_exit\_\_* will be called, so you can safely manage the clean up conditions.
+
+An example for this is the case of a backup of a Data Base, where you can ensure a stop of the database, allow backup options and then run it again:
+
+~~~Python
+class BackUpDataBase:
+    def __enter__(self):
+        stop_db()
+        return self
+    
+    defl __exit__(self, exc_type, exc_value, exc_traceback):
+        restart_db()
+
+def main():
+    with BackUpDataBase():
+        backup_db()
+~~~
+
+When designing this type of implementation, consider what should be done before and after a certain block. And a good practice is to set up a return value in the *\_\_enter\_\_*.
+
+In the case of the *\_\_exit\_\_*, the arguments passed refers to the exception type, exception value and exception traceback, which can be *None* if nothing happens. Also, in this context, do not consider a *True* return unless you have a good reason for that.
+
+## More implementations for context managers
+
+There are more cases than just *\_\_enter\_\_* and *\_\_exit\_\_*, for example, we can usse the **contextlib** module from the standard library.
+
+This module contains helper functions and objects to implement context managers and use others already implemented to write more compact code.
+
+We can start with the *contextlib.contextmanager* decorator, which converts the code on a function into a context manager, so you can implement enter/exit methods inside one by taking advantage of a generator function.
+
+~~~Python
+import contextlib
+
+@contextlib.contextmanager
+def handler_db():
+    stop_db()
+    yield
+    start_db()
+
+with handler_db():
+    backup_db()
+~~~
