@@ -184,3 +184,28 @@ def handler_db():
 with handler_db():
     backup_db()
 ~~~
+
+The *yield* is used to define a generator function, which returns a generator iterator that produces a sequence of values on demand rather than computing each of them at once. In other words, every word after the *yield* can be considered part of *\_\_exit\_\_*.
+
+The previous presentation allows an easier refactoring, reusage of codes and an option to have a context manager that doesn't belong to any particular class.
+
+Another tool from this library is the *contextlib.ContextDecorator* which is a mixin base class that provides the logic for applying a decorator to a function so it will make it run inside the context manager.
+
+~~~Python
+class dbhandler_decorator(contextlib.ContextDecorator):
+    def __enter__(self):
+        db_stop()
+    
+    def __exit__(self, exc_type, exc_value, exc_traceback):
+        db_start()
+
+@dbhandler_decorator()
+def db_backup()
+    run("backup")
+~~~
+
+As you may notice, you can create an inherit class to implement your own decorator and it will act as a context manager for the given function.
+
+This implementation allows independence (the decorator doesn't know about the functions aspect and viceversa) which is good but it can also be a downgrade as you cannot use the elements returned by *\_\_exit\_\_*. Also, the decorator logic is only defined once and can be reused many times.
+
+To finish this sections, let's explore another tool from *contextlib*.
