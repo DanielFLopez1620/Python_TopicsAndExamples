@@ -209,3 +209,48 @@ As you may notice, you can create an inherit class to implement your own decorat
 This implementation allows independence (the decorator doesn't know about the functions aspect and viceversa) which is good but it can also be a downgrade as you cannot use the elements returned by *\_\_exit\_\_*. Also, the decorator logic is only defined once and can be reused many times.
 
 To finish this sections, let's explore another tool from *contextlib*.
+
+Let's use the *contextlib.suppress* which is a *util* package that enters a context manager which allows the management of certain provided exceptions (so it acts similar a *try* / *except*) with a calling in the *suppress* method to make the management more explicit.
+
+~~~Python
+import contextlib
+
+with contextlib.suppress(DataConversionException):
+    enter_data(json_input)
+~~~
+
+## Properties, attributes, and different types of methods for objects
+
+In Python, everything is public (the underscore is just a notation to indicate a private intention), so it is different of what you are use to use with other language (public, private and protected).
+
+So, let's explore more about the convetions in Python for the elements present in a class or code that you should consider:
+
+### Underscores in Python
+
+As the brief comment before, underscores can have meaning in the context of Python.
+
+~~~Python
+class Cupboard:
+    def __init__(self, drawers, id)
+        self._drawers = drawers
+        self.id = id
+~~~
+
+Both attributes of the class are accesible, but by convention the elements that start with a single underscore (*\_*) should be kept as private.
+
+To access private elements, you should use **getters** and **setters** properly, this as a way for secure read/write operations. Also, the elements that remain exposed should be releant to an external caller object.
+
+~~~Python
+class Cupboard:
+    def __init__(self, drawers, id)
+        self._drawers = drawers
+        self.__hidden = 20
+        self.id = id
+
+    def getDrawers(self):
+        print("# of drawers is:", self._drawers)
+~~~
+
+Now, what about a double underscore (*\_\_*), it implies that it is private and that no other object can modify it. If you try to access to it, it will display an **AttributeError**. The real reason behind this behavior is the **name mangling** that creates a different name for the attribute based on ```_<class_name>__<attr_name>``` and then you can access it (everything is public in Python).
+
+However, keep in mind that double underscores aren't the Pythonic way.
