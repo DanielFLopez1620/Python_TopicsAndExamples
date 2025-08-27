@@ -57,11 +57,11 @@ But, if you didn't know, all these cases implies the use of *slice* which is a P
 (2, 5, 13)
 ~~~
 
-And in case, you want to skip a parameter, for example, to include the beginning as in *\[:3\]*, you just use **None** in the slice.
+And in case, you want to skip a parameter, for example, to include the beginning as in ```[:3]```, you just use ```None``` in the slice.
 
 ## Creating sequences
 
-The magic of getting elements of arrays or collections of elements is thanks to the *\_\_getitem\_\_* method, which is called when we use the brackets to access a certain element and it also checks the *\_\_len\_\_* methods to obtain the size and determinate if it is a valid access.
+The magic of getting elements of arrays or collections of elements is thanks to the ```__getitem__``` method, which is called when we use the brackets to access a certain element and it also checks the ```__len__``` methods to obtain the size and determinate if it is a valid access.
 
 This means that you can implement your own access to sequences in custom classes, so let's check two approaches
 
@@ -83,11 +83,11 @@ class Iterable:
 
 Some keypoints to consider here are:
 
-- **\*values** in the constructor definitions means that will take all the arguments passed by extension.
+- ```*values``` in the constructor definitions means that will take all the arguments passed by extension.
 
-- **\_values** is a representation of a private attribute for this class, which is still accesible outside but by convention should be access directly.
+- ```_values``` is a representation of a private attribute for this class, which is still accesible outside but by convention should be access directly.
 
-- We access to the **\_\_getitem\_\_** method inherited from the list class we are based on.
+- We access to the ```__getitem__``` method inherited from the list class we are based on.
 
 ### Implementing a custom sequence
 
@@ -123,7 +123,7 @@ class MySequence:
 
 A tool that can correctly respond to a pattern which can be every situation where we want to run some code with pre/pos conditions, for example, when we open a file we want to make sure they are closed after the processing (to prevent corruption and leaks) and you would have to remember to free the resources of allocation and so on...
 
-In the case of Python, we can use **finally** to add execution steps after a block is completed or exited, in the case of our previous example it should be easy as:
+In the case of Python, we can use ```finally``` to add execution steps after a block is completed or exited, in the case of our previous example it should be easy as:
 
 ~~~Python
 my_file = open(filename)
@@ -142,7 +142,7 @@ with open(filename) as fd:
 
 In the case of **with**, which was introduces in the PEP-343, it enters the context manager which will open the file and will close it at the end.
 
-The context managers consist of two base methods *\_\_enter\_\_* and *\_\_exit\_\_**, which, as you may suppose, act when entering and going outside the desired scope, in the case of the **with** it would be in the openning of the file and after the processing of the file. Even in the case where exception occurs, the *\_\_exit\_\_* will be called, so you can safely manage the clean up conditions.
+The context managers consist of two base methods ```__enter__``` and ```__exit__```, which, as you may suppose, act when entering and going outside the desired scope, in the case of the **with** it would be in the openning of the file and after the processing of the file. Even in the case where exception occurs, the ```__exit__``` will be called, so you can safely manage the clean up conditions.
 
 An example for this is the case of a backup of a Data Base, where you can ensure a stop of the database, allow backup options and then run it again:
 
@@ -160,17 +160,17 @@ def main():
         backup_db()
 ~~~
 
-When designing this type of implementation, consider what should be done before and after a certain block. And a good practice is to set up a return value in the *\_\_enter\_\_*.
+When designing this type of implementation, consider what should be done before and after a certain block. And a good practice is to set up a return value in the ```__enter__```.
 
-In the case of the *\_\_exit\_\_*, the arguments passed refers to the exception type, exception value and exception traceback, which can be *None* if nothing happens. Also, in this context, do not consider a *True* return unless you have a good reason for that.
+In the case of the ```__exit__```, the arguments passed refers to the exception type, exception value and exception traceback, which can be *None* if nothing happens. Also, in this context, do not consider a *True* return unless you have a good reason for that.
 
 ## More implementations for context managers
 
-There are more cases than just *\_\_enter\_\_* and *\_\_exit\_\_*, for example, we can usse the **contextlib** module from the standard library.
+There are more cases than just ```__enter__``` and ```__exit__```, for example, we can use the ```contextlib``` module from the standard library.
 
 This module contains helper functions and objects to implement context managers and use others already implemented to write more compact code.
 
-We can start with the *contextlib.contextmanager* decorator, which converts the code on a function into a context manager, so you can implement enter/exit methods inside one by taking advantage of a generator function.
+We can start with the ```contextlib.contextmanager``` decorator, which converts the code on a function into a context manager, so you can implement enter/exit methods inside one by taking advantage of a generator function.
 
 ~~~Python
 import contextlib
@@ -185,11 +185,11 @@ with handler_db():
     backup_db()
 ~~~
 
-The *yield* is used to define a generator function, which returns a generator iterator that produces a sequence of values on demand rather than computing each of them at once. In other words, every word after the *yield* can be considered part of *\_\_exit\_\_*.
+The *yield* is used to define a generator function, which returns a generator iterator that produces a sequence of values on demand rather than computing each of them at once. In other words, every word after the *yield* can be considered part of ```__exit__```.
 
 The previous presentation allows an easier refactoring, reusage of codes and an option to have a context manager that doesn't belong to any particular class.
 
-Another tool from this library is the *contextlib.ContextDecorator* which is a mixin base class that provides the logic for applying a decorator to a function so it will make it run inside the context manager.
+Another tool from this library is the ```contextlib.ContextDecorator``` which is a mixin base class that provides the logic for applying a decorator to a function so it will make it run inside the context manager.
 
 ~~~Python
 class dbhandler_decorator(contextlib.ContextDecorator):
@@ -206,7 +206,7 @@ def db_backup()
 
 As you may notice, you can create an inherit class to implement your own decorator and it will act as a context manager for the given function.
 
-This implementation allows independence (the decorator doesn't know about the functions aspect and viceversa) which is good but it can also be a downgrade as you cannot use the elements returned by *\_\_exit\_\_*. Also, the decorator logic is only defined once and can be reused many times.
+This implementation allows independence (the decorator doesn't know about the functions aspect and viceversa) which is good but it can also be a downgrade as you cannot use the elements returned by ```__exit```. Also, the decorator logic is only defined once and can be reused many times.
 
 To finish this sections, let's explore another tool from *contextlib*.
 
@@ -225,7 +225,7 @@ In Python, everything is public (the underscore is just a notation to indicate a
 
 So, let's explore more about the convetions in Python for the elements present in a class or code that you should consider:
 
-### Underscores in Python
+### Underscores
 
 As the brief comment before, underscores can have meaning in the context of Python.
 
@@ -236,7 +236,7 @@ class Cupboard:
         self.id = id
 ~~~
 
-Both attributes of the class are accesible, but by convention the elements that start with a single underscore (*\_*) should be kept as private.
+Both attributes of the class are accesible, but by convention the elements that start with a single underscore (```_```) should be kept as private.
 
 To access private elements, you should use **getters** and **setters** properly, this as a way for secure read/write operations. Also, the elements that remain exposed should be releant to an external caller object.
 
@@ -251,6 +251,64 @@ class Cupboard:
         print("# of drawers is:", self._drawers)
 ~~~
 
-Now, what about a double underscore (*\_\_*), it implies that it is private and that no other object can modify it. If you try to access to it, it will display an **AttributeError**. The real reason behind this behavior is the **name mangling** that creates a different name for the attribute based on ```_<class_name>__<attr_name>``` and then you can access it (everything is public in Python).
+Now, what about a double underscore ```__```, it implies that it is private and that no other object can modify it. If you try to access to it, it will display an **AttributeError**. The real reason behind this behavior is the **name mangling** that creates a different name for the attribute based on ```_<class_name>__<attr_name>``` and then you can access it (everything is public in Python).
 
 However, keep in mind that double underscores aren't the Pythonic way.
+
+### Properties
+
+You may be used to implement the regular attributes just to hold values, but you may also require to compute based on the state of the object and the value of the other attributes, so you can implement properties, which are access control tools defined to interact with attributes.
+
+Let's be honest here... they are the **getters** and **setters** you know from other languages.
+
+~~~Python
+import re
+
+USERNAME_FORMAT = re.compile(r"^[A-Za-z0-9_]{3,20}$")
+
+
+def is_valid_username(candidate: str) -> bool:
+    return re.match(USERNAME_FORMAT, candidate) is not None
+
+
+class User:
+    def __init__(self, name: str):
+        self._username = None
+        self.username = name
+
+    @property
+    def username(self) -> str:
+        return self._username
+
+    @username.setter
+    def username(self, new_name: str):
+        if not is_valid_username(new_name):
+            raise ValueError(
+                f"Can't set '{new_name}' because it's not a valid username "
+                "(must be 3–20 characters, letters/numbers/underscore)."
+            )
+        self._username = new_name
+
+
+
+u = User("test_user")
+print(u.username)
+u.username = "invalid name"
+~~~
+
+We just watched an implementation to check a valid alphanumeric username. We have a ```@property``` defined that acts as a getter. This implementation reflects the case of respecting a private attribute an only using the valid interfaces to access it.
+
+To go further, we have the setter that have a companion *@username.setter* which indicates the usage of the already defined property (yes, you have to define the property first). This approach allows to run validations before updating the value, in the case presented with a validation function for the regex code.
+
+Just as a reminder, prefer this approach of properties and avoid to use named methods (```get...``` or ```set...```) to be more Pythonic.
+
+Now, let's introduce another term the CC08 or better as **command and query separation** which refers simply that a method of an object should eather answer or do something but do not both (so not get/set on the same boat please). As our aim is to be as concise and short as possible for better abstraction, readable and reusable code.
+
+## Iterables obj
+
+For... for... our iterable friend with arrays, tuples, sets, dicts... but it is all? Well... no.
+
+Python has its own *iteration protocol*, so when using ```for e in elements:``` it checks:
+
+- If the object itself has ```__next__``` or ```__iter__``` methods.
+- If the sequence has ```__len__``` and ```__getitem__``` methods.
