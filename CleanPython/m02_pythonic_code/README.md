@@ -311,4 +311,36 @@ For... for... our iterable friend with arrays, tuples, sets, dicts... but it is 
 Python has its own *iteration protocol*, so when using ```for e in elements:``` it checks:
 
 - If the object itself has ```__next__``` or ```__iter__``` methods.
+
 - If the sequence has ```__len__``` and ```__getitem__``` methods.
+
+So, what does Python interpreter consider when using iterable objects, it aims to call ```iter()``` which as you may suppose use ```__iter__``` in the background, but it will also require ```__next__```.
+
+~~~Python
+class Countdown
+    def __init__(self, start):
+        self.start = start
+
+    def __iter__(self):
+        return CountdownIterator(self.start)
+
+class CountdownIterator:
+    def __init__(self, start):
+        self.current = start
+
+    def __iter__(self)
+        return self
+
+    def __next__(self):
+        if self.current <= 0:
+            raise StopIteration
+        self.current -= 1
+        return value
+
+def main()
+    for num in Countdown(5):
+        print(f"Counting down: {num}")
+
+if __name__ == __main__()
+    main()
+~~~
