@@ -1,12 +1,12 @@
 # About coding formatting
 
-It is more than having a beautiful code, as you may notice that the better the structure of a code is, the better is understand and mantain it.
+It is more than having a beautiful code, as you may notice that the better the structure of a code is, the better is understand and maintain it.
 
-A clean code is one who allow us to communicate with other developers. Then, its importances is related also with agility, effectiveness and management, as with a maintainable and readable code you can go in a steady, constant and predictable way.
+A clean code is one who allow us to communicate with other developers. Then, its importance is related also with agility, effectiveness and management, as with a maintainable and readable code you can go in a steady, constant and predictable way.
 
-One important term that appears is a **technical debt** that refers to those bad decisions made previously that ended up affecting the project later, and as a debt it will become a greater problem the more time is passes and what is worse is that it can be a silent situtation.
+One important term that appears is a **technical debt** that refers to those bad decisions made previously that ended up affecting the project later, and as a debt it will become a greater problem the more time is passes and what is worse is that it can be a silent situation.
 
-In the case of Python, there are options like the **PEP-8** or cusotm project standards, but it is not only about following these rules as the objective is to be clear and clean, so the code can be understood easily with a single glance (as possible).
+In the case of Python, there are options like the **PEP-8** or custom project standards, but it is not only about following these rules as the objective is to be clear and clean, so the code can be understood easily with a single glance (as possible).
 
 Now, let's take a look to the characteristic of the [PEP8](https://peps.python.org/pep-0008/):
 
@@ -24,7 +24,7 @@ Now, let's take a look to the characteristic of the [PEP8](https://peps.python.o
 
   For more information, you can check on the [grep guide from CyberCity](https://www.cyberciti.biz/faq/howto-use-grep-command-in-linux-unix/).
 
-- **Consistenty:** So the code looks uniform and it is easier to read.
+- **Consistency:** So the code looks uniform and it is easier to read.
 
 - **Code quality:** Improve the understanding of the code with one glance and it will give you hints of potential bugs.
 
@@ -32,17 +32,17 @@ Now, let's take a look to the characteristic of the [PEP8](https://peps.python.o
 
 Good code is self-explanatory but also well-documented. So, focus on what it is supposed to do, not how.
 
-Comments should be avoided while docummenting should be preferred, so you can add information of the data types, examples and important annotations.
+Comments should be avoided while documenting should be preferred, so you can add information of the data types, examples and important annotations.
 
 In the case of types, this is pretty relevant in Python as it is dynamically typed.
 
-### Docstrings
+### Docstring
 
-It is simple, they are string placed in the code with the intention of docummenting a certain part of code, so here you should just add explanation and not justification, then you shouldn't use them for comments.
+It is simple, they are string placed in the code with the intention of documenting a certain part of code, so here you should just add explanation and not justification, then you shouldn't use them for comments.
 
 Why not comments? Well... they can represent our failures to express our ideas in the code, they can mislead the interpretation of the code. There are still some exceptions, like errors in a third-party library that we need to highlight.
 
-Why docstrings? It is simple, they documentate a component (module, class, method or function), where in Python one of the most important cases is related with type usage.
+Why docstring? It is simple, they document a component (module, class, method or function), where in Python one of the most important cases is related with type usage.
 
 One important aspect of the docstring is that it not only becomes part of the code, but also becomes part of a class/object via is **\_\_doc\_\_** attribute
 
@@ -60,7 +60,7 @@ This is also important when using tools for documentation, as the documentation 
 
 Also, keep in mind that the documentation is as important as a wiki, a user manual or even as a *README* file of a repository.
 
-Sadly, some of its disadvantages remain, being the most harmful one, that the *docstring* have to be mantained manually and at constants period of times.
+Sadly, some of its disadvantages remain, being the most harmful one, that the *docstring* have to be maintained manually and at constants period of times.
 
 ### Annotations
 
@@ -74,7 +74,7 @@ class Point:
     
 def insert_point(x: float, y: float) -> Point:
     """
-    Insert a poin the the cartesian map
+    Insert a point the the cartesian map
     """
     pass
 ~~~
@@ -93,18 +93,18 @@ So, the annotations become useful to generate documentation, run validations or 
 
 After this, we must highlight the PEP-484 which refers to the basics of the type hinting: "Python will remain a dynamically typed language, and the authors have no desire to ever make type hints mandatory, even by convention."
 
-This means that the type hinting's purpose is to have a extra tool to check and assess the correct use of types throughout the code and help to prevent incompabilities. As here, some tools appear, like [Mypy](https://www.mypy-lang.org/).
+This means that the type hinting's purpose is to have a extra tool to check and assess the correct use of types throughout the code and help to prevent incompatibilities. As here, some tools appear, like [Mypy](https://www.mypy-lang.org/).
 
 So now... a question may appear in our heads...
 
-### Annotations replace docstrings?
+### Annotations replace docstring?
 
-Well... previously, types were specified in docstrings, but now, annotations make it more compressed. However, the answer to the question is more complex....
+Well... previously, types were specified in docstring, but now, annotations make it more compressed. However, the answer to the question is more complex....
 
-So, let's keep in mind the next... types can be added by using annotations and even more information, mostly on nested/dynamic types can be added on the docstrings to improve the documentation, for example:
+So, let's keep in mind the next... types can be added by using annotations and even more information, mostly on nested/dynamic types can be added on the docstring to improve the documentation, for example:
 
 ~~~Python
-def pair_collectioning(received: dict) -> dict:
+def pair_collecting(received: dict) -> dict:
     """
     If the pairs are both valid strings, it will return valid dict pair.
 
@@ -193,7 +193,7 @@ pip install pylint
 sudo pat install python3-pylint-common
 ~~~
 
-Then just use the comand, **pylint** and the path of the ptyhon file to get the review. To further configure you can use the *pylintrc* file.
+Then just use the command, **pylint** and the path of the python file to get the review. To further configure you can use the *pylintrc* file.
 
 So, let's check the example of [L02_check_pylint.py](/CleanPython/m01_code_formatting/L02_check_pylint.py):
 
@@ -225,7 +225,7 @@ CleanPython/m01_code_formatting/L02_check_pylint.py:3:0: C0116: Missing function
 Your code has been rated at 0.00/10 (previous run: 0.00/10, +0.00)
 ~~~
 
-As shown in this case, it can highlight items related to the names (files or variables) itself, while also providing comments related to the docstrings.
+As shown in this case, it can highlight items related to the names (files or variables) itself, while also providing comments related to the docstring.
 
 ### Make
 
@@ -254,13 +254,13 @@ After that, you just use the make and you are done:
 make checklist
 ~~~
 
-This will check for the compliance of the PEP8, then check types and finally run the tests. If one of the steps faile, consider the entire process as a failure.
+This will check for the compliance of the PEP8, then check types and finally run the tests. If one of the steps fails, consider the entire process as a failure.
 
 ### [Black](https://github.com/ambv/black)
 
 Another useful tool that you can use to check the code and even it will give format by itself, for example, by making sure the Strings are always in use of double-quotes and ensure the order of parameters.
 
-It may be inconvenient that this tool actually edit the codes, mostly in cases of control version. However, it helps us to focus more on the problem than worryinng about the structure.
+It may be inconvenient that this tool actually edit the codes, mostly in cases of control version. However, it helps us to focus more on the problem than worrying about the structure.
 
 You can install *black* with:
 

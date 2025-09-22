@@ -22,7 +22,7 @@ Arrays? Lists? Easy, you just access their elements by indexes. And as you may r
 1620
 ~~~
 
-And we can go further with slices, which is literaly what it means, a slice (or fragment) of the list or array.
+And we can go further with slices, which is literally what it means, a slice (or fragment) of the list or array.
 
 ~~~Python
 # Continuing with the previous example
@@ -34,7 +34,7 @@ The convention of the slices implies that the beginning of the range is inclusiv
 
 ~~~Python
 >>> other_collection = (1, 2, 3, 5, 8, 13, 21, 34)
-# Accesing from beginning to given limit
+# Accessing from beginning to given limit
 >>> other_collection[:4]
 (1, 2, 3, 5)
 # Accessing from limit to the ending
@@ -81,17 +81,17 @@ class Iterable:
         return self._values.__getitem__(item)
 ~~~
 
-Some keypoints to consider here are:
+Some key points to consider here are:
 
 - ```*values``` in the constructor definitions means that will take all the arguments passed by extension.
 
-- ```_values``` is a representation of a private attribute for this class, which is still accesible outside but by convention should be access directly.
+- ```_values``` is a representation of a private attribute for this class, which is still accessible outside but by convention should be access directly.
 
 - We access to the ```__getitem__``` method inherited from the list class we are based on.
 
 ### Implementing a custom sequence
 
-This implementation that doesn't rely on a built-in object must remember that the result of an indexing operation shouldl be an instance of the same class and the slice should respect the range of the beginning until the end minus one position.
+This implementation that doesn't rely on a built-in object must remember that the result of an indexing operation should be an instance of the same class and the slice should respect the range of the beginning until the end minus one position.
 
 In that case, a raw implementation can look like this:
 
@@ -133,7 +133,7 @@ finally:
     my_file.close()
 ~~~
 
-But there are simpliers mechanism like:
+But there are simplifiers mechanism like:
 
 ~~~Python
 with open(filename) as fd:
@@ -142,7 +142,7 @@ with open(filename) as fd:
 
 In the case of **with**, which was introduces in the PEP-343, it enters the context manager which will open the file and will close it at the end.
 
-The context managers consist of two base methods ```__enter__``` and ```__exit__```, which, as you may suppose, act when entering and going outside the desired scope, in the case of the **with** it would be in the openning of the file and after the processing of the file. Even in the case where exception occurs, the ```__exit__``` will be called, so you can safely manage the clean up conditions.
+The context managers consist of two base methods ```__enter__``` and ```__exit__```, which, as you may suppose, act when entering and going outside the desired scope, in the case of the **with** it would be in the opening of the file and after the processing of the file. Even in the case where exception occurs, the ```__exit__``` will be called, so you can safely manage the clean up conditions.
 
 An example for this is the case of a backup of a Data Base, where you can ensure a stop of the database, allow backup options and then run it again:
 
@@ -152,7 +152,7 @@ class BackUpDataBase:
         stop_db()
         return self
     
-    defl __exit__(self, exc_type, exc_value, exc_traceback):
+    def __exit__(self, exc_type, exc_value, exc_traceback):
         restart_db()
 
 def main():
@@ -187,7 +187,7 @@ with handler_db():
 
 The *yield* is used to define a generator function, which returns a generator iterator that produces a sequence of values on demand rather than computing each of them at once. In other words, every word after the *yield* can be considered part of ```__exit__```.
 
-The previous presentation allows an easier refactoring, reusage of codes and an option to have a context manager that doesn't belong to any particular class.
+The previous presentation allows an easier refactoring, re-usage of codes and an option to have a context manager that doesn't belong to any particular class.
 
 Another tool from this library is the ```contextlib.ContextDecorator``` which is a mixin base class that provides the logic for applying a decorator to a function so it will make it run inside the context manager.
 
@@ -206,7 +206,7 @@ def db_backup()
 
 As you may notice, you can create an inherit class to implement your own decorator and it will act as a context manager for the given function.
 
-This implementation allows independence (the decorator doesn't know about the functions aspect and viceversa) which is good but it can also be a downgrade as you cannot use the elements returned by ```__exit```. Also, the decorator logic is only defined once and can be reused many times.
+This implementation allows independence (the decorator doesn't know about the functions aspect and vice-versa) which is good but it can also be a downgrade as you cannot use the elements returned by ```__exit```. Also, the decorator logic is only defined once and can be reused many times.
 
 To finish this sections, let's explore another tool from *contextlib*.
 
@@ -223,7 +223,7 @@ with contextlib.suppress(DataConversionException):
 
 In Python, everything is public (the underscore is just a notation to indicate a private intention), so it is different of what you are use to use with other language (public, private and protected).
 
-So, let's explore more about the convetions in Python for the elements present in a class or code that you should consider:
+So, let's explore more about the conventions in Python for the elements present in a class or code that you should consider:
 
 ### Underscores
 
@@ -236,9 +236,9 @@ class Cupboard:
         self.id = id
 ~~~
 
-Both attributes of the class are accesible, but by convention the elements that start with a single underscore (```_```) should be kept as private.
+Both attributes of the class are accessible, but by convention the elements that start with a single underscore (```_```) should be kept as private.
 
-To access private elements, you should use **getters** and **setters** properly, this as a way for secure read/write operations. Also, the elements that remain exposed should be releant to an external caller object.
+To access private elements, you should use **getters** and **setters** properly, this as a way for secure read/write operations. Also, the elements that remain exposed should be relevant to an external caller object.
 
 ~~~Python
 class Cupboard:
@@ -302,7 +302,7 @@ To go further, we have the setter that have a companion *@username.setter* which
 
 Just as a reminder, prefer this approach of properties and avoid to use named methods (```get...``` or ```set...```) to be more Pythonic.
 
-Now, let's introduce another term the CC08 or better as **command and query separation** which refers simply that a method of an object should eather answer or do something but do not both (so not get/set on the same boat please). As our aim is to be as concise and short as possible for better abstraction, readable and reusable code.
+Now, let's introduce another term the CC08 or better as **command and query separation** which refers simply that a method of an object should either answer or do something but do not both (so not get/set on the same boat please). As our aim is to be as concise and short as possible for better abstraction, readable and reusable code.
 
 ## Iterables obj
 
