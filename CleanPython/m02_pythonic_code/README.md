@@ -344,3 +344,34 @@ def main()
 if __name__ == __main__()
     main()
 ~~~
+
+As you may notice, when implementing the iterations you should consider when to step and raise a ```StopIteration```.
+
+Before, moving on there is another consideration to keep in mind, it is about what the iter should do else than just returning ```self```, let's check another example with a date range container
+
+~~~Python
+from datetime import timedelta
+
+class DateRangeContainerIterable:
+    def __init__(self, start_date, end_date):
+        self.start_date = start_date
+        self.end_date = end_date
+
+    def __iter__(self):
+        current_day = self.start_date
+        while current_day < self.end_date:
+            yield current_day
+            current_day += timedelta(days=1)
+
+def main():
+    for d in DataRangeContainerIterable(date(2025,9,20), date(2025, 9, 24)):
+        print(d)
+~~~
+
+So, it is a good idea to work with container iterables when dealing with generators, so you prefer memory efficient (yields one value at a time),allows multiple iterations, use single iterator exhaustion.
+
+### Creating iteration sequences
+
+If you do not implement and ```__iter__``` and still try to iterate, it will search for a ```__getitem__```, and if it isn't found, well you get a ```TypeError```.
+
+But as we presented before, to create a sequence we just need the implementation of ```__len__``` and ```__getitem__```. So, this implementation should be carefully planned. Why? Because if you need to pass element by element it will consume more resources.
