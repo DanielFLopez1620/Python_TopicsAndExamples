@@ -375,3 +375,52 @@ So, it is a good idea to work with container iterables when dealing with generat
 If you do not implement and ```__iter__``` and still try to iterate, it will search for a ```__getitem__```, and if it isn't found, well you get a ```TypeError```.
 
 But as we presented before, to create a sequence we just need the implementation of ```__len__``` and ```__getitem__```. So, this implementation should be carefully planned. Why? Because if you need to pass element by element it will consume more resources.
+
+So, let's create a sequence to illustrate our current focus:
+
+~~~Python
+class CountDownRange:
+    def __init__(self, start_value, end_value, step)
+        self.start_value = start_value
+        self.end_value = end_value
+        self.step = step
+
+    def __iter__(self):
+        current = self.start_value
+        while current + step < self.end_value
+            yield current
+            current += step
+~~~
+
+As you may suppose now, when having a loop based range, it will call ```__iter__``` again until the range is completed.
+
+Let's go deeper with sequences, and explore more about them... to the question... of not using ```__iter__``` and ```__getitem```, then the approach of the sequence would be:
+
+~~~Python
+class CountDownRangeVariation:
+    def __init__(self, start_value, end_value, step)
+        self.start_value = start_value
+        self.end_value = end_value
+        self.step = step
+        self._range = self._create_range()
+
+    def _create_range(self):
+        result = []
+        current = self.start_value
+        while current + step < self.end_value
+            result.append(current)
+            current += step
+        return result
+
+    def __getitem__(self, num):
+        return self._range[num]
+
+    def __len__(self):
+        return len(self._range)
+~~~
+
+You may doubt it but... even with this last implementation, you can use negative indexes as the work is delegated to the base implementation of a *list*. 
+
+Before you decide which sequence to implement, make sure to test and compare the CPU and memory usage if each implementation.
+
+## Container obj
