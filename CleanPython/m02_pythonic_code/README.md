@@ -419,8 +419,54 @@ class CountDownRangeVariation:
         return len(self._range)
 ~~~
 
-You may doubt it but... even with this last implementation, you can use negative indexes as the work is delegated to the base implementation of a *list*. 
+You may doubt it but... even with this last implementation, you can use negative indexes as the work is delegated to the base implementation of a *list*.
 
 Before you decide which sequence to implement, make sure to test and compare the CPU and memory usage if each implementation.
 
-## Container obj
+## Container objects and content
+
+Now... what containers do have in common? Of course, the ```__contains__``` method. Yeah... I didn't answer that first too. But let's proceed to learn more.
+
+The Python implementation that calls this method can be ```in```:
+
+~~~Python
+<element> in <container>
+~~~
+
+Which is reflected as:
+
+~~~Python
+<cointainer>.__contains__(<element>)
+~~~
+
+Let's explore a more detailed example:
+
+~~~Python
+import string
+
+class PasswordPolicy:
+    def __init__(self, min_length=8, require_digit=True, require_symbol=True):
+        self.min_length = min_length
+        self.require_digit = require_digit
+        self.require_symbol = require_symbol
+
+    def __contains__(self, password: str):
+        if(len(password) < self.min_length>)
+            return False
+        if self.require_digit and not any(ch.isdigit() for ch in password):
+            return False
+        if self.require_symbol and not aby(ch in string.punctuation for ch in password):
+            return False
+        return True
+
+policy = PasswordPolicy()
+
+print("Pa$$sw0rd" in policy)
+print("Password" in policy)
+~~~
+
+As you just checked, the ```in``` implementation can also be used to check policies, going further than containers, for example, to review characteristics and conditions of the data before considering it is inside a group or element.
+
+## Dynamic attributes for objects
+
+
