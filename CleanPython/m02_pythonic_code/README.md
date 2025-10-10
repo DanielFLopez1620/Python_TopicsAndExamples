@@ -469,4 +469,57 @@ As you just checked, the ```in``` implementation can also be used to check polic
 
 ## Dynamic attributes for objects
 
+This is possible bu considering the implementation of ```__getattr__```. How? Check the next example:
 
+~~~Python
+class ClassWithAttrs:
+    def __init__(self, attribute):
+        self.attribute = attribute
+
+    def __getattr__(self, attr):
+        if attr.startswith("fallback_")
+            name = attr.replace("fallback_", "")
+            return f"[fallback resolved] {name}"
+        raise AttributeError(
+            f"{self.__class__.__name__} has no attribute {attr}")
+
+special = ClassWithAttrs("value")
+print(special.attribute)
+~~~
+
+So, you can use the ```__getattr__``` definition to  get transformation on the class to include new values. Do not forget to implement the **raise** as it is required by the method. And also, do not forget to consider multiple cases when adding attributes this way.
+
+## Callable objects
+
+Objects as functions? Sounds crazy but can help you sometimes. How? Bu using decorators or (as we will focus) using the method ```__call__```.
+
+This method will be called when you try to execute an object as if it were a regular function, the arguments will be passed too. Why to implement this? One common application is related with states.
+
+Keep in mind that the implementation is:
+
+~~~Python
+object(*args, **kwargs)
+# Also transformed into:
+object.__cal__(*args, **kwargs)
+~~~
+
+Let's proceed with the example:
+
+~~~Python
+class ToggleCount:
+
+    def __init__(self):
+        self._state = False
+        self._counter = 0
+
+    def __call__(self):
+        self._state = not self._state
+        if(self._state != False)
+            self._counter += 1
+
+    def get_counter(self)
+        return self._counter
+
+~~~
+
+## Remember the magic methods
