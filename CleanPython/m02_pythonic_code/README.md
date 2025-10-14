@@ -436,7 +436,7 @@ The Python implementation that calls this method can be ```in```:
 Which is reflected as:
 
 ~~~Python
-<cointainer>.__contains__(<element>)
+<container>.__contains__(<element>)
 ~~~
 
 Let's explore a more detailed example:
@@ -519,7 +519,62 @@ class ToggleCount:
 
     def get_counter(self)
         return self._counter
-
 ~~~
 
 ## Remember the magic methods
+
+As an overview of what we learnt on this module, check the next table with the **magic methods**:
+
+| Statement                        | Magic method                          | Python concept              |
+|----------------------------------|---------------------------------------|-----------------------------|
+| `obj[key]`, `obj[i:j]`, `obj[i:j:k]` | `__getitem__(key)`                    | Subscriptable object        |
+| `with obj:`, `...`         | `__enter__` / `__exit__`              | Context manager             |
+| `for i in obj:`, `...`     | `__iter__` / `__next__`, `__len__` / `__getitem__` | Iterable object, Sequence |
+| `obj.<attribute>`                | `__getattr__`                         | Dynamic attribute retrieval |
+| `obj(*args, **kwargs)`           | `__call__(*args, **kwargs)`           | Callable object             |
+
+For additional examples, do not forget to check the example codes on this module.
+
+## Additional tips to consider
+
+### Beware of mutable default arguments
+
+For cases like *dicts*, *list* and other mutable objects, it is not recommended an initialization, as in most cases it will only work at that time.
+
+~~~Python
+# Bad
+def w_display(data: dict = {"name": "John Doe", "age" : 20}):
+    name = data.pop("name")
+    age = data.pop("age")
+
+    return f"{name} : {age} years old."
+
+# Correct
+def c_display(data: dict = None):
+    name = data.pop("name")
+    age = data.pop("age")
+
+    return f"{name} : {age} years old."
+~~~
+
+### Extending built-in types
+
+Do not reinvent the wheel, if a struct or type has some functions you need but you still require more... Inherit and add what you need! You can add additional definitions or overload the existing ones only if really required. But be careful, do not extend for the original *build-in types*, then take advantage of already defined collections in **Collections** like **UserList**, **UserCollection** and more.
+
+~~~Python
+from collections import UserList
+
+class CustomList(UserList):
+    def __getitem__(self, idx):
+        value = super().__getitem__(index)
+        return f"User here is what you requested: {value}"
+~~~
+
+## Additional resources
+
+- [Collections | Docs Python](https://docs.python.org/3/library/collections.html)
+- [Why numbering should start at zero | CS U TEXAS](https://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD831.html)
+- [PEP 8 | PEPS](https://peps.python.org/pep-0008/)
+- [PEP 343 | PEPS](https://peps.python.org/pep-0343/)
+- [Built-In Functions | Docs Python](https://docs.python.org/3/library/functions.html#iter)
+- [CPy vs PyPy Classes | Docs Python](https://doc.pypy.org/en/latest/cpython_differences.html#subclasses-of-built-in-types)
