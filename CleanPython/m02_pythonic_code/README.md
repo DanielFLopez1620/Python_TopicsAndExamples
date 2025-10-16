@@ -533,7 +533,9 @@ As an overview of what we learnt on this module, check the next table with the *
 | `obj.<attribute>`                | `__getattr__`                         | Dynamic attribute retrieval |
 | `obj(*args, **kwargs)`           | `__call__(*args, **kwargs)`           | Callable object             |
 
-For additional examples, do not forget to check the example codes on this module.
+For additional examples, do not forget to check the example codes on this module:
+
+- [l01_library.py](/CleanPython/m02_pythonic_code/l01_library.py): It is an example focused on illustrating all the magic methods used on this module.
 
 ## Additional tips to consider
 
