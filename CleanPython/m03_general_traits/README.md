@@ -36,7 +36,61 @@ You must ensure the state of the response after the process has been done (assum
 
 ### Pythonic contract
 
+The best way to achieve this is by providing control mechanism for our methods. Then, taking advantages of raises like ```RunTimeError``` or ```ValueError```. Also, you can choose to create your own proper exceptions.
+
+Another consideration can be the isolation of the code, as much as you can. How? By creating smaller functions and decorators.
+
+All of this to maintain the principles of this approach, recognize errors when the contract is broke.
+
+### Simple example
+
+Here is a illustrative example of DbC theory provided by Eiffel Software:
+
+~~~Python
+class DICTIONARY [ELEMENT]
+feature
+    put (x: ELEMENT; key: STRING) is
+            -- Insert x so that it will be retrievable
+            -- through key.
+        require
+            count <= capacity
+            not key.empty
+        ensure
+            has (x)
+            item (key) = x
+            count = old count + 1
+        end
+
+    ... Interface specifications of other features ...
+
+invariant
+    0 <= count
+    count <= capacity
+end
+~~~
+
+You can see clearly the preconditions and postconditions, while having additional info on the invariant conditions.
+
+## Defensive Programming
+
+It refers to... defend until you cannot hold longer! Well... really not, but instead of a contract, it is an approach where the objects, functions and methods are able to protect themselves against invalid inputs.
+
+Here you consider some scenarios where you might expect something to happen, and then implement a code that prevents it, which can include handling procedures, assertions or ensuring types.
+
+### Error handling
+
+The idea is to gracefully respond to expected error in an attempt to either continue the program execution or fails if it is better than the error propagates. It can include cases like:
+
+- **Value Substitution:** When you make a substitution of a forbidden/conflicting value to a more proper one which can be a default, a well-known case, a sentinel value or a approximate approach but it must be carefully considered to avoid higher risks, so the option becomes a selection based on robustness and correctness.
+
+    ~~~Python
+    def get_info(port=1991)
+        info = log(port)
+        return info.compressed()
+    ~~~
+
 ## Additional resources
 
-- [PEP 316 | Python](https://peps.python.org/pep-0316/)
-
+- [PEP 316 - Programming by Contract for Python | Python](https://peps.python.org/pep-0316/)
+- [Design by Contract & its revelance in Game Programming | Medium](https://medium.com/@kaushik.swapnil5/design-by-contract-its-relevance-in-game-programming-de7c75558b64)
+- [Building bug-free O-O software | Eiffel Software](https://www.eiffel.com/values/design-by-contract/introduction/)
