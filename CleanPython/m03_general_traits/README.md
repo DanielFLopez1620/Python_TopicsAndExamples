@@ -89,6 +89,32 @@ The idea is to gracefully respond to expected error in an attempt to either cont
         return info.compressed()
     ~~~
 
+- **Exception Handling:** It is better to stop the program to avoid it continuous working with wrong data. This does not only refer to data passed as input, as the functions can have side-effects or there may be external factors affecting the code. So the function/method should communicate properly, clearly and unambiguously the problem and notify it to the rest of the application.
+
+  As you may have guessed, the exceptions are the mechanism for these purposes, as the management can handle the different exceptions that arise. However, they can weaken encapsulation as you may prefer to declare all the exceptions possible but you should be aware than then the function isn't context-free and may have additional side effects worth considering in other elements or components. To handle them correctly, consider:
+
+  - **Right level of abstraction:** The exception has to be consistent with the logic encapsulated on it. For this, you can compare the next cases:
+
+    ~~~Python
+    def read_file(path):
+        try:
+            with open(path, "r") as f:
+                return f.read()
+        except FileNotFoundError:
+            # Incorrect as the file reader should consider this
+            print("Error: File Not Found")
+            return ""
+    ~~~
+
+    ~~~Python
+    def read_file(path):
+        with open(path, "r") as f:
+            return f.read()
+        # Correct as the exception is responsability of the file reader
+    ~~~
+
+    The first case is wrong, as it calls an exception out of context (the file can be checked before or the file reader alreay implements that logic). While the second case is correct as its allow the propagation of the situation.
+
 ## Additional resources
 
 - [PEP 316 - Programming by Contract for Python | Python](https://peps.python.org/pep-0316/)
