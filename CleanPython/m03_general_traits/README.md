@@ -110,13 +110,37 @@ The idea is to gracefully respond to expected error in an attempt to either cont
     def read_file(path):
         with open(path, "r") as f:
             return f.read()
-        # Correct as the exception is responsability of the file reader
+        # Correct as the exception is responsibility of the file reader
     ~~~
 
-    The first case is wrong, as it calls an exception out of context (the file can be checked before or the file reader alreay implements that logic). While the second case is correct as its allow the propagation of the situation.
+    The first case is wrong, as it calls an exception out of context (the file can be checked before or the file reader already implements that logic). While the second case is correct as its allow the propagation of the situation.
+
+    - **Do not expose tracebacks:** For security, avoid telling the problem as other can take advantage of it. But do not get it wrong, you will need the full log message to understand how to solve the problem, but only for you (or other devs), so prevent giving that to the attackers and choose generic information.
+
+    - **Avoid empty except blocks:** Yeah... nothing of that ```pass```on exception until you come with that idea. As in this case, being too defensive can be also a problem.
+
+    So, prefer more specific exception management (not to catch all with ```Exception```) and do some actual error handling on the ```except```block.
+
+    - **Include the original exceptions:** Do not omit information or even change it later. If you solved something, do not remove the original exception management and also keep the information or case that led to that situation.
+
+    This can refer to the usage of ```raise``` to revive that case.
+
+    ~~~Python
+    class InternalMissingValueError(Exception):
+        """
+        Missing value on the domain
+        """
+
+    def  retribute_data(array, idx)
+        try:
+            return array[idx]
+        except ValueError as e:
+            raise InternalMissingValueError("Missing") from e
+    ~~~
+
 
 ## Additional resources
 
 - [PEP 316 - Programming by Contract for Python | Python](https://peps.python.org/pep-0316/)
-- [Design by Contract & its revelance in Game Programming | Medium](https://medium.com/@kaushik.swapnil5/design-by-contract-its-relevance-in-game-programming-de7c75558b64)
+- [Design by Contract & its relevance in Game Programming | Medium](https://medium.com/@kaushik.swapnil5/design-by-contract-its-relevance-in-game-programming-de7c75558b64)
 - [Building bug-free O-O software | Eiffel Software](https://www.eiffel.com/values/design-by-contract/introduction/)
